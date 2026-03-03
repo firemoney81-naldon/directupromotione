@@ -486,43 +486,41 @@
 
 
 
-  <style>
+   <style>
         /* [핵심] 뷰포트 전체 높이 확보 및 정 중앙 배치 설정 */
         body { 
             background-color: #f4f7f9; 
             font-family: 'Pretendard', sans-serif; 
             margin: 0; 
             padding: 0; 
-            /* 화면 배치를 제어하기 위해 flex 설정 */
-            display: flex;
-            flex-direction: column;
-            
-            /* [중요] 뷰포트 높이 100% 확보 */
-            min-height: 100vh; 
-            /* [중요] 수직 정렬 (Main Axis: column) */
-            justify-content: center; 
-            /* [중요] 수평 정렬 (Cross Axis: align-items) */
-            align-items: center; 
+            /* PC 중앙 정렬을 위해 body flex 설정을 제거합니다. 
+               대신 bridge-container에 position: fixed를 적용하여 뷰포트 중앙에 고정합니다. */
         }
         
-        /* [핵심] HTML 맨 밑에 있는 브릿지 컨테이너를 화면 맨 위로 올림 */
-        /* display: flex; body 설정으로 인해 order: -1; 이 적용되면, 
-           이전 요소들을 뒤로 밀어내고 bridge-container가 상단에 배치됩니다. 
-           (주의: body에 justify-content: center; 를 설정하면 전체 내용이 중앙에 배치되므로, 
-           만약 기존 내용이 많다면 이 설정이 부적합할 수 있습니다. 
-           이 예시에서는 브릿지 컨테이너만 중앙에 오도록 나머지 내용은 무시하는 방식입니다.) */
+        /* [핵심] 브릿지 컨테이너를 뷰포트 정중앙에 고정 배치 (PC/Mobile 공통) */
         .bridge-container {
-            order: -1; /* 다른 요소들보다 우선순위를 높여 맨 위로 보냄 */
+            /* 1. 뷰포트 기준으로 위치를 고정 */
+            position: fixed; 
+            /* 2. 상단에서 50%, 왼쪽에서 50% 지점으로 이동 */
+            top: 50%; 
+            left: 50%; 
+            /* 3. 컨테이너 크기의 절반만큼 되돌려 정중앙에 배치 */
+            transform: translate(-50%, -50%); 
+            
+            /* 컨테이너 기본 스타일 */
             padding: 70px 40px;
-            text-align: center;
+            text-align: center; /* [핵심] 컨테이너 내부 텍스트 및 인라인 요소 중앙 정렬 */
             max-width: 650px;
-            margin: 0 auto; /* 수평 중앙 정렬 (flexbox align-items와 함께 작동) */
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
             border: 1px solid #efefef;
-            box-sizing: border-box; /* padding이 max-width를 초과하지 않도록 설정 */
+            box-sizing: border-box; 
         }
+
+        /* ---------------------------------------------------------------------- */
+        /* 브릿지 컨테이너 내부 요소 스타일 */
+        /* ---------------------------------------------------------------------- */
 
         .bridge-container h1 {
             font-size: 38px;
@@ -559,16 +557,7 @@
             transform: translateY(-2px);
         }
 
-        .ad-disclaimer {
-            font-size: 10pt; 
-            color: #555555; 
-            line-height: 1.6;
-            word-break: keep-all;
-            margin-top: 60px;
-            padding-top: 25px;
-            border-top: 1px solid #f0f0f0; 
-        }
-
+        /* [핵심] 동적 카운터 영역 스타일 (텍스트 중앙 정렬) */
         .dynamic-counter-area {
             margin-top: 40px;
             padding-top: 25px;
@@ -581,6 +570,7 @@
             color: #222;
             line-height: 1.5;
             letter-spacing: -0.5px;
+            /* h2는 기본적으로 block 요소이지만, text-align: center;를 상속받아 내부 텍스트가 중앙 정렬됨 */
         }
 
         .dynamic-counter-area .highlight {
@@ -588,14 +578,25 @@
             font-weight: 900;
             color: #007bff; 
         }
-    </style>
 
+        /* 하단 광고 고지 문구 스타일 */
+        .ad-disclaimer {
+            font-size: 10pt; 
+            color: #555555; 
+            line-height: 1.6;
+            word-break: keep-all;
+            margin-top: 60px;
+            padding-top: 25px;
+            border-top: 1px solid #f0f0f0; 
+        }
+    </style>
 
     <!-- 
         기존 HTML 내용: 
-        order: -1; 속성 때문에 .bridge-container가 이 내용보다 위에 표시됩니다.
+        position: fixed; 설정으로 인해 .bridge-container가 화면 위에 고정됩니다.
     -->
     <div style="padding: 20px; text-align: center;">
+  
     </div>
 
     <!-- 
@@ -933,6 +934,7 @@ function setMetaTag(attrType, attrName, content) {
 <link rel="preload" href="https://static.cdninstagram.com/rsrc.php/v4/yY/r/Eil-fzuGz0e.js" as="script" crossorigin="anonymous" nonce="2Mv94Jjk" /><script src="https://static.cdninstagram.com/rsrc.php/v4/yY/r/Eil-fzuGz0e.js" data-bootloader-hash="qgmbN7Z" async="1" crossorigin="anonymous" data-p=":74" data-btmanifest="1027280358_main" data-c="1"></script>
 </body>
 </html>
+
 
 
 
