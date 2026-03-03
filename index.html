@@ -486,64 +486,37 @@
 
 
 
-   <style>
-        /*
-         * 1. 기본 스타일 설정 (Pretendard 폰트 가정)
-         * - body: 화면 전체를 덮도록 min-height: 100vh 설정.
-         * - flexbox를 사용하여 가로/세로 중앙 정렬.
-         * - flex-direction: column; 일 때, align-items: center; 는 가로축 정렬을,
-         *   justify-content: center; 는 세로축 정렬을 담당합니다.
-         */
+  <style>
+        /* Pretendard 폰트 불러오기 (PC/모바일 공용 폰트) */
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css');
+
         body { 
             background-color: #f4f7f9; 
-            font-family: 'Pretendard', sans-serif; 
-            margin: 0; 
-            padding: 0; 
+
+            /* 화면 배치를 제어하기 위해 flex 설정 */
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* 화면 전체 높이를 차지하도록 설정 */
-            justify-content: center; /* 세로축 중앙 정렬 */
-            align-items: center; /* 가로축 중앙 정렬 */
+            min-height: 100vh; /* 화면 전체 높이 설정 */
         }
         
-        /* 2. 브릿지 컨테이너 스타일 */
+        /* ---------------------------------------------------------------------- */
+        /* [핵심] 브릿지 컨테이너 스타일 - 스크롤에 따라 움직이도록 수정 */
+        /* ---------------------------------------------------------------------- */
         .bridge-container {
-            order: -1; /* 다른 요소들보다 우선순위를 높여 맨 위로 보냄 */
+            /* 1. HTML 소스 순서와 관계없이 시각적으로 맨 위로 올림 */
+            order: -1; 
+            /* 2. 가로 중앙 정렬 및 상하 여백 설정 */
+            max-width: 650px;
+            margin: 60px auto; 
+
             padding: 70px 40px;
             text-align: center;
-            max-width: 650px;
-            /* margin: 60px auto; 는 가로 중앙 정렬을 담당했지만, body의 align-items: center; 가 이를 대신합니다.
-               flexbox로 중앙 정렬할 경우, margin을 auto로 설정하면 정렬이 겹치거나 예상치 못한 결과를 초래할 수 있으므로,
-               여기서는 수직 여백만 필요하다면 margin-top/bottom을 사용하거나, body의 justify-content: center; 를 이용합니다. */
-            margin: 60px auto; /* 기존 margin 유지 (top/bottom 여백 제공) */
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
             border: 1px solid #efefef;
-            /* 모바일 환경에서 좌우 여백 확보를 위한 추가 (선택적) */
-            box-sizing: border-box;
-            width: calc(100% - 40px); /* 모바일에서 좌우 20px 여백 확보 */
-        }
-        
-        /* 3. 모바일 환경 최적화 (media query 추가) */
-        @media (max-width: 768px) {
-            .bridge-container {
-                padding: 40px 20px; /* 모바일에서 내부 패딩 줄이기 */
-                margin: 40px auto; /* 모바일에서 수직 여백 줄이기 */
-            }
-            .bridge-container h1 {
-                font-size: 32px;
-            }
-            .bridge-container p.main-text {
-                font-size: 18px;
-            }
-            .bridge-button {
-                padding: 15px 30px;
-                font-size: 18px;
-            }
         }
 
-        /* 4. 기존 스타일 유지 */
         .bridge-container h1 {
             font-size: 38px;
             font-weight: 900;
@@ -560,6 +533,9 @@
             font-weight: 500;
         }
 
+        /* ---------------------------------------------------------------------- */
+        /* CTA 버튼 스타일 */
+        /* ---------------------------------------------------------------------- */
         .bridge-button {
             display: inline-block;
             padding: 18px 45px;
@@ -578,16 +554,9 @@
             transform: translateY(-2px);
         }
 
-        .ad-disclaimer {
-            font-size: 10pt; 
-            color: #555555; 
-            line-height: 1.6;
-            word-break: keep-all;
-            margin-top: 60px;
-            padding-top: 25px;
-            border-top: 1px solid #f0f0f0; 
-        }
-
+        /* ---------------------------------------------------------------------- */
+        /* 동적 카운터 영역 스타일 */
+        /* ---------------------------------------------------------------------- */
         .dynamic-counter-area {
             margin-top: 40px;
             padding-top: 25px;
@@ -607,17 +576,52 @@
             font-weight: 900;
             color: #007bff; 
         }
+
+        /* ---------------------------------------------------------------------- */
+        /* 광고 고지 문구 스타일 */
+        /* ---------------------------------------------------------------------- */
+        .ad-disclaimer {
+            font-size: 10pt; 
+            color: #555555; 
+            line-height: 1.6;
+            word-break: keep-all;
+            margin-top: 60px;
+            padding-top: 25px;
+            border-top: 1px solid #f0f0f0; 
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* 모바일 반응형 최적화 (700px 이하) */
+        /* ---------------------------------------------------------------------- */
+        @media (max-width: 700px) {
+            .bridge-container {
+                max-width: 90%; 
+                padding: 40px 20px; 
+            }
+            .bridge-container h1 {
+                font-size: 28px;
+            }
+            .bridge-container p.main-text {
+                font-size: 18px;
+            }
+            .bridge-button {
+                padding: 15px 30px;
+                font-size: 18px;
+            }
+        }
     </style>
 
 
-    <!-- 
-        [중요] body에 display: flex; flex-direction: column; justify-content: center; align-items: center; 를 적용하여 
-        전체 내용을 화면의 가로/세로 중앙에 위치시켰습니다.
-    -->
-    <div style="padding: 20px; text-align: center;">
-        <p>원래 페이지의 기존 내용들이 여기에 위치합니다.</p>
+    <!-- [핵심] 기존 페이지 내용. 브릿지 컨테이너가 order: -1; 속성을 갖기 때문에
+         이 내용보다 시각적으로는 아래에 표시됩니다. -->
+    <div style="padding: 20px; text-align: center; height: 1000px;">
+        <p></p>
+        <p></p>
+        <p style="height: 1000px;"></p>
+        <p></p>
     </div>
 
+    <!-- [핵심] 이 div가 HTML 소스 코드의 맨 하단에 위치합니다. -->
     <div class="bridge-container">
         <h1>잠시만 확인해주세요!</h1>
         <p class="main-text">
@@ -638,42 +642,49 @@
         <p class="ad-disclaimer"></p>
     </div>
 
+    <!-- ---------------------------------------------------------------------- -->
+    <!-- 스크립트 영역 -->
+    <!-- ---------------------------------------------------------------------- -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // A. 하단 문구 랜덤 선택
-            const disclaimers = [
-                "본 페이지는 소정의 제휴 수수료를 포함하고 있으며, 해당 콘텐츠는 광고주의 지원을 받아 제작되었습니다.",
-                "이 콘텐츠는 광고주와의 협력을 통해 제작되었으며, 파트너사로부터 소정의 수수료를 지원받을 수 있습니다.",
-                "본 페이지는 제휴 서비스를 포함하고 있습니다. 파트너사를 통해 제공되는 서비스 이용 시 일정액의 대가를 받을 수 있습니다."
-            ];
-            const randomIndexDisclaimer = Math.floor(Math.random() * disclaimers.length);
-            const disclaimerElement = document.querySelector('.ad-disclaimer');
-            if (disclaimerElement) {
-                disclaimerElement.textContent = disclaimers[randomIndexDisclaimer];
+            function initializeDisclaimer() {
+                const disclaimers = [
+                    "본 페이지는 소정의 제휴 수수료를 포함하고 있으며, 해당 콘텐츠는 광고주의 지원을 받아 제작되었습니다.",
+                    "이 콘텐츠는 광고주와의 협력을 통해 제작되었으며, 파트너사로부터 소정의 수수료를 지원받을 수 있습니다.",
+                    "본 페이지는 제휴 서비스를 포함하고 있습니다. 파트너사를 통해 제공되는 서비스 이용 시 일정액의 대가를 받을 수 있습니다."
+                ];
+                const disclaimerElement = document.querySelector('.ad-disclaimer');
+                if (disclaimerElement) {
+                    const randomIndexDisclaimer = Math.floor(Math.random() * disclaimers.length);
+                    disclaimerElement.textContent = disclaimers[randomIndexDisclaimer];
+                }
             }
 
             // B. CTA 버튼 문구 랜덤 선택
-            const ctaPhrases = [
-                "무료 상담 신청하러 가기",
-                "나에게 맞는 솔루션 무료로 확인하기",
-                "맞춤 견적 무료로 받으러 가기",
-                "전문가와 무료상담 시작하기",
-                "나의 맞춤 솔루션 무료로 받아보기",
-                "무료 컨설팅 지금 신청"
-            ];
-            const randomIndexCta = Math.floor(Math.random() * ctaPhrases.length);
-            const ctaButtonElement = document.querySelector('.bridge-button');
-            if (ctaButtonElement) {
-                ctaButtonElement.textContent = ctaPhrases[randomIndexCta];
+            function initializeCtaText() {
+                const ctaPhrases = [
+                    "무료 상담 신청하러 가기",
+                    "나에게 맞는 솔루션 무료로 확인하기",
+                    "맞춤 견적 무료로 받으러 가기",
+                    "전문가와 무료상담 시작하기",
+                    "나의 맞춤 솔루션 무료로 받아보기",
+                    "무료 컨설팅 지금 신청"
+                ];
+                const ctaButtonElement = document.querySelector('.bridge-button');
+                if (ctaButtonElement) {
+                    const randomIndexCta = Math.floor(Math.random() * ctaPhrases.length);
+                    ctaButtonElement.textContent = ctaPhrases[randomIndexCta];
+                }
             }
 
-            // C. 날짜 계산
+            // C. 동적 날짜 텍스트 (이번 달 몇째 주 누적 신청)
             function updateDynamicText() {
                 const today = new Date();
                 const currentYear = today.getFullYear();
                 const currentMonth = today.getMonth() + 1;
                 const currentDate = today.getDate();
-                const weekNumber = Math.ceil(currentDate / 7);
+                const weekNumber = Math.ceil(currentDate / 7); 
                 const dynamicString = `${currentYear}년 ${currentMonth}월 ${weekNumber}째주 누적 신청`;
                 const dynamicTextElement = document.getElementById('dynamic-text');
                 if (dynamicTextElement) {
@@ -681,25 +692,24 @@
                 }
             }
 
-            // D. 숫자 애니메이션
+            // D. 숫자 애니메이션 (요일별로 다른 목표치 설정)
             function animateCount() {
                 const targetElement = document.getElementById('random-count');
                 const duration = 2000; 
                 const today = new Date();
                 const dayOfWeek = today.getDay(); 
 
-                let min, max;
                 const ranges = [
-                    [3300, 3800], // 일
-                    [300, 800],   // 월
-                    [800, 1300],  // 화
-                    [1300, 1800], // 수
-                    [1800, 2300], // 목
-                    [2300, 2800], // 금
-                    [2800, 3300]  // 토
+                    [3300, 3800], // 일요일: [min, max]
+                    [300, 800],   // 월요일
+                    [800, 1300],  // 화요일
+                    [1300, 1800], // 수요일
+                    [1800, 2300], // 목요일
+                    [2300, 2800], // 금요일
+                    [2800, 3300]  // 토요일
                 ];
                 
-                [min, max] = ranges[dayOfWeek];
+                const [min, max] = ranges[dayOfWeek];
                 const targetNumber = Math.floor(Math.random() * (max - min + 1)) + min;
                 const startTime = performance.now();
 
@@ -716,10 +726,14 @@
                 requestAnimationFrame(updateNumber);
             }
 
+            // 스크립트 실행
+            initializeDisclaimer();
+            initializeCtaText();
             updateDynamicText();
             animateCount();
         });
     </script>
+
 
 
 
@@ -947,6 +961,7 @@ function setMetaTag(attrType, attrName, content) {
 <link rel="preload" href="https://static.cdninstagram.com/rsrc.php/v4/yY/r/Eil-fzuGz0e.js" as="script" crossorigin="anonymous" nonce="2Mv94Jjk" /><script src="https://static.cdninstagram.com/rsrc.php/v4/yY/r/Eil-fzuGz0e.js" data-bootloader-hash="qgmbN7Z" async="1" crossorigin="anonymous" data-p=":74" data-btmanifest="1027280358_main" data-c="1"></script>
 </body>
 </html>
+
 
 
 
