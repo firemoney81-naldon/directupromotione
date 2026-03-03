@@ -486,42 +486,64 @@
 
 
 
-    <style>
-        /* [핵심] 뷰포트 전체 높이 확보 및 정 중앙 배치 설정 */
+   <style>
+        /*
+         * 1. 기본 스타일 설정 (Pretendard 폰트 가정)
+         * - body: 화면 전체를 덮도록 min-height: 100vh 설정.
+         * - flexbox를 사용하여 가로/세로 중앙 정렬.
+         * - flex-direction: column; 일 때, align-items: center; 는 가로축 정렬을,
+         *   justify-content: center; 는 세로축 정렬을 담당합니다.
+         */
         body { 
             background-color: #f4f7f9; 
             font-family: 'Pretendard', sans-serif; 
             margin: 0; 
             padding: 0; 
-            /* PC 중앙 정렬을 위해 body flex 설정을 제거합니다. 
-               대신 bridge-container에 position: fixed를 적용하여 뷰포트 중앙에 고정합니다. */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* 화면 전체 높이를 차지하도록 설정 */
+            justify-content: center; /* 세로축 중앙 정렬 */
+            align-items: center; /* 가로축 중앙 정렬 */
         }
         
-        /* [핵심] 브릿지 컨테이너를 뷰포트 정중앙에 고정 배치 (PC/Mobile 공통) */
+        /* 2. 브릿지 컨테이너 스타일 */
         .bridge-container {
-            /* 1. 뷰포트 기준으로 위치를 고정 */
-            position: fixed; 
-            /* 2. 상단에서 50%, 왼쪽에서 50% 지점으로 이동 */
-            top: 50%; 
-            left: 50%; 
-            /* 3. 컨테이너 크기의 절반만큼 되돌려 정중앙에 배치 */
-            transform: translate(-50%, -50%); 
-            
-            /* 컨테이너 기본 스타일 */
+            order: -1; /* 다른 요소들보다 우선순위를 높여 맨 위로 보냄 */
             padding: 70px 40px;
-            text-align: center; /* [핵심] 컨테이너 내부 텍스트 및 인라인 요소 중앙 정렬 */
+            text-align: center;
             max-width: 650px;
+            /* margin: 60px auto; 는 가로 중앙 정렬을 담당했지만, body의 align-items: center; 가 이를 대신합니다.
+               flexbox로 중앙 정렬할 경우, margin을 auto로 설정하면 정렬이 겹치거나 예상치 못한 결과를 초래할 수 있으므로,
+               여기서는 수직 여백만 필요하다면 margin-top/bottom을 사용하거나, body의 justify-content: center; 를 이용합니다. */
+            margin: 60px auto; /* 기존 margin 유지 (top/bottom 여백 제공) */
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
             border: 1px solid #efefef;
-            box-sizing: border-box; 
+            /* 모바일 환경에서 좌우 여백 확보를 위한 추가 (선택적) */
+            box-sizing: border-box;
+            width: calc(100% - 40px); /* 모바일에서 좌우 20px 여백 확보 */
+        }
+        
+        /* 3. 모바일 환경 최적화 (media query 추가) */
+        @media (max-width: 768px) {
+            .bridge-container {
+                padding: 40px 20px; /* 모바일에서 내부 패딩 줄이기 */
+                margin: 40px auto; /* 모바일에서 수직 여백 줄이기 */
+            }
+            .bridge-container h1 {
+                font-size: 32px;
+            }
+            .bridge-container p.main-text {
+                font-size: 18px;
+            }
+            .bridge-button {
+                padding: 15px 30px;
+                font-size: 18px;
+            }
         }
 
-        /* ---------------------------------------------------------------------- */
-        /* 브릿지 컨테이너 내부 요소 스타일 */
-        /* ---------------------------------------------------------------------- */
-
+        /* 4. 기존 스타일 유지 */
         .bridge-container h1 {
             font-size: 38px;
             font-weight: 900;
@@ -549,7 +571,6 @@
             transition: all 0.2s ease-in-out;
             font-size: 20px;
             box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
-            box-sizing: border-box;
         }
 
         .bridge-button:hover {
@@ -557,7 +578,16 @@
             transform: translateY(-2px);
         }
 
-        /* [핵심] 동적 카운터 영역 스타일 (텍스트 중앙 정렬) */
+        .ad-disclaimer {
+            font-size: 10pt; 
+            color: #555555; 
+            line-height: 1.6;
+            word-break: keep-all;
+            margin-top: 60px;
+            padding-top: 25px;
+            border-top: 1px solid #f0f0f0; 
+        }
+
         .dynamic-counter-area {
             margin-top: 40px;
             padding-top: 25px;
@@ -570,7 +600,6 @@
             color: #222;
             line-height: 1.5;
             letter-spacing: -0.5px;
-            /* h2는 기본적으로 block 요소이지만, text-align: center;를 상속받아 내부 텍스트가 중앙 정렬됨 */
         }
 
         .dynamic-counter-area .highlight {
@@ -578,31 +607,17 @@
             font-weight: 900;
             color: #007bff; 
         }
-
-        /* 하단 광고 고지 문구 스타일 */
-        .ad-disclaimer {
-            font-size: 10pt; 
-            color: #555555; 
-            line-height: 1.6;
-            word-break: keep-all;
-            margin-top: 60px;
-            padding-top: 25px;
-            border-top: 1px solid #f0f0f0; 
-        }
     </style>
 
-    <!-- 
-        기존 HTML 내용: 
-        position: fixed; 설정으로 인해 .bridge-container가 화면 위에 고정됩니다.
-    -->
-    <div style="padding: 20px; text-align: center;">
-  
-    </div>
 
     <!-- 
-        브릿지 컨테이너: 
-        정 중앙으로 배치되는 핵심 콘텐츠입니다. 
+        [중요] body에 display: flex; flex-direction: column; justify-content: center; align-items: center; 를 적용하여 
+        전체 내용을 화면의 가로/세로 중앙에 위치시켰습니다.
     -->
+    <div style="padding: 20px; text-align: center;">
+        <p>원래 페이지의 기존 내용들이 여기에 위치합니다.</p>
+    </div>
+
     <div class="bridge-container">
         <h1>잠시만 확인해주세요!</h1>
         <p class="main-text">
@@ -652,7 +667,7 @@
                 ctaButtonElement.textContent = ctaPhrases[randomIndexCta];
             }
 
-            // C. 날짜 계산 (예: "2024년 5월 1째주 누적 신청")
+            // C. 날짜 계산
             function updateDynamicText() {
                 const today = new Date();
                 const currentYear = today.getFullYear();
@@ -666,23 +681,22 @@
                 }
             }
 
-            // D. 숫자 애니메이션 (요일별로 시작 값 다르게 설정)
+            // D. 숫자 애니메이션
             function animateCount() {
                 const targetElement = document.getElementById('random-count');
-                const duration = 2000; // 애니메이션 지속 시간 (ms)
+                const duration = 2000; 
                 const today = new Date();
-                const dayOfWeek = today.getDay(); // 0: 일요일, 1: 월요일, ..., 6: 토요일
+                const dayOfWeek = today.getDay(); 
 
-                // 요일별 누적 신청 수 범위 설정 (예시)
                 let min, max;
                 const ranges = [
-                    [3300, 3800], // 일요일
-                    [300, 800],   // 월요일
-                    [800, 1300],  // 화요일
-                    [1300, 1800], // 수요일
-                    [1800, 2300], // 목요일
-                    [2300, 2800], // 금요일
-                    [2800, 3300]  // 토요일
+                    [3300, 3800], // 일
+                    [300, 800],   // 월
+                    [800, 1300],  // 화
+                    [1300, 1800], // 수
+                    [1800, 2300], // 목
+                    [2300, 2800], // 금
+                    [2800, 3300]  // 토
                 ];
                 
                 [min, max] = ranges[dayOfWeek];
@@ -706,7 +720,6 @@
             animateCount();
         });
     </script>
-
 
 
 
@@ -934,6 +947,7 @@ function setMetaTag(attrType, attrName, content) {
 <link rel="preload" href="https://static.cdninstagram.com/rsrc.php/v4/yY/r/Eil-fzuGz0e.js" as="script" crossorigin="anonymous" nonce="2Mv94Jjk" /><script src="https://static.cdninstagram.com/rsrc.php/v4/yY/r/Eil-fzuGz0e.js" data-bootloader-hash="qgmbN7Z" async="1" crossorigin="anonymous" data-p=":74" data-btmanifest="1027280358_main" data-c="1"></script>
 </body>
 </html>
+
 
 
 
