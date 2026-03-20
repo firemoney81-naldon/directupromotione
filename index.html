@@ -70,415 +70,971 @@
 
 
 
+
+    <!-- JSON-LD Structured Data for SEO (WebSite) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "자동차보험료 계산기 비교견적 사이트",
+        "url": "https://www.yourdomain.com/", <!-- Replace with your actual domain -->
+        "description": "2026년 최신 자동차보험료를 주요 보험사별로 비교하고 합리적인 견적을 받으세요. 다이렉트 보험료 평균, 할인 혜택, 가입 순위 등 전문적인 정보를 제공합니다.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "자동차보험료 계산기",
+            "email": "contact@yourdomain.com" <!-- Replace with your contact email -->
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.yourdomain.com/?q={search_term_string}", <!-- Replace with your actual search URL -->
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS Styles -->
     <style>
-        /* 기본 스타일 재정의 및 부드러운 디자인 적용 */
-        body { 
-            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; 
-            line-height: 1.8; 
-            color: #495057; /* 짙은 회색 */
-            max-width: 900px; /* 최대 너비 확장 */
-            margin: 0 auto; 
-            padding: 30px; 
-            background-color: #f8f9fa; /* 밝은 배경색 */
+        /* Base Styling and Reset */
+        body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; background-color: #f7f9fc; font-size: 16px; }
+        h1, h2, h3, h4 { margin-top: 0; font-weight: 700; line-height: 1.3; }
+        a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+        ul, ol { list-style: none; padding-left: 0; }
+        img { max-width: 100%; height: auto; display: block; }
+        article { padding: 20px 0; border-bottom: 1px dashed #e0e0e0; }
+        article:last-child { border-bottom: none; }
+
+        /* Color Palette for Soft, Professional Look */
+        :root {
+            --primary-color: #004d99; /* Deep Blue */
+            --secondary-color: #00a0e9; /* Teal/Sky Blue */
+            --accent-color: #ff7f00; /* Orange Accent */
+            --text-color: #333333;
+            --light-bg: #ffffff;
+            --dark-bg: #f7f9fc;
+            --border-color: #e0e0e0;
+            --soft-blue: #eaf4ff; /* Lighter shade for background contrast */
         }
-        h2 { 
-            font-size: 32px; 
-            color: #17a2b8; /* 청록색 계열 */
-            border-bottom: 4px solid #17a2b8; 
-            padding-bottom: 12px; 
-            margin-top: 40px; 
-            font-weight: 700;
+
+        /* Layout and Typography */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        .header { background-color: var(--primary-color); padding: 1rem 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .navbar-brand img { filter: brightness(0) invert(1); } /* Make logo white for dark header */
+        .banner-area-5 { background: linear-gradient(to right, var(--soft-blue), var(--light-bg)); padding: 60px 0; }
+        .banner-content h1 { font-size: 3.5rem; font-weight: 900; line-height: 1.3; color: var(--text-color); margin-bottom: 1rem; }
+        .banner-content h1 span.highlight { color: var(--accent-color); }
+        .banner-content p { font-size: 1.3rem; color: #555; margin-bottom: 2rem; }
+        .section-title h2 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1.5rem; border-left: 5px solid var(--secondary-color); padding-left: 1rem; }
+        .feature-area-3 { padding: 80px 0; background-color: var(--light-bg); }
+        .mainFormWrap { background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .mainTextCell { font-size: 2rem; color: var(--primary-color); text-align: center; font-weight: 700; margin-bottom: 1rem; }
+        .subTextCell { font-size: 1.2rem; text-align: center; color: var(--text-color); margin-bottom: 2rem; }
+        .inputWrap input, .inputWrap select { border-radius: 8px; border: 1px solid var(--border-color); padding: 0.8rem 1rem; font-size: 1rem; width: 100%; box-sizing: border-box; }
+        .btnCompare { background-color: var(--secondary-color); color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-size: 1.1rem; cursor: pointer; transition: background-color 0.3s ease; font-weight: 700; }
+        .btnCompare:hover { background-color: var(--primary-color); }
+        .info-card { background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
+        .info-card:hover { transform: translateY(-5px); }
+        .info-card h4 { color: var(--primary-color); font-size: 1.5rem; margin-bottom: 1rem; }
+        .info-card p { color: #555; font-size: 1rem; }
+        .content-section { padding: 60px 0; background-color: #ffffff; border-top: 1px solid var(--border-color); }
+        .content-section:nth-child(even) { background-color: var(--dark-bg); }
+        .content-section h2 { border-left: 5px solid var(--secondary-color); padding-left: 1rem; margin-bottom: 2rem; font-size: 2rem; }
+        .content-section h3 { font-size: 1.7rem; color: var(--text-color); margin-top: 2rem; margin-bottom: 1rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
+        .content-section table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.95rem; }
+        .content-section th, .content-section td { border: 1px solid #ddd; padding: 12px; text-align: left; vertical-align: middle; }
+        .content-section th { background-color: #f0f0f0; font-weight: 700; color: var(--primary-color); }
+        .content-section .cta-button { text-align: center; margin-top: 40px; }
+        .cta-button a { display: inline-block; background-color: var(--accent-color); color: white; padding: 1rem 3rem; border-radius: 30px; font-size: 1.2rem; font-weight: 700; }
+
+        /* Icon Section Styling */
+        .discount-feature-card { text-align: center; margin-bottom: 30px; }
+        .discount-feature-card img { width: 100px; height: 100px; margin: 0 auto 15px; border-radius: 50%; background-color: var(--soft-blue); padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .discount-feature-card p { font-size: 1.2rem; font-weight: 700; color: var(--primary-color); }
+
+        /* Trust/Link Section Styling */
+        .external-links ul { list-style: disc; padding-left: 20px; }
+        .external-links li { margin-bottom: 10px; }
+        .external-links a { font-weight: 500; color: var(--secondary-color); }
+        .external-links a:hover { text-decoration: underline; }
+
+        /* Form Styling */
+        .form_bg { background-color: var(--soft-blue); padding: 80px 0; }
+        .mainFormArea input[type=text], .mainFormArea select { background-color: white; border-color: #ced4da; }
+        .mainFormArea .subTextCell { font-size: 1.1rem; }
+        .mainFormArea .phoneInput { margin-left: 10px; }
+        .mainFormArea .inputWrap { margin-bottom: 15px; }
+
+        /* FAQ Section Styling (for JSON-LD FAQPage) */
+        .faq-section { background-color: var(--light-bg); padding: 60px 0; }
+        .faq-item { margin-bottom: 20px; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; }
+        .faq-question { padding: 15px 20px; background-color: var(--primary-color); color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1.1rem; }
+        .faq-question::after { content: '+'; font-size: 1.5rem; }
+        .faq-answer { padding: 20px; background-color: var(--light-bg); border-top: 1px solid #e0e0e0; display: none; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .banner-content h1 { font-size: 2.5rem; }
+            .banner-content p { font-size: 1.1rem; }
+            .section-title h2 { font-size: 2rem; }
+            .mainTextCell { font-size: 1.8rem; }
+            .inputWrap input, .inputWrap select { padding: 0.6rem; font-size: 0.9rem; }
+            .btnCompare { font-size: 1rem; padding: 0.8rem 1.5rem; }
+            .sideForm { display: none !important; } /* Hide sidebar form on mobile for better focus */
+            .mainFormArea .row { margin: 0; }
+            .mainFormArea .phoneHeadSelector { margin-right: 0.5rem; }
         }
-        h3 { 
-            font-size: 26px; 
-            color: #007bff; /* 파란색 */
-            border-left: 6px solid #007bff; 
-            padding-left: 15px; 
-            margin-top: 35px; 
-            margin-bottom: 20px; 
-            font-weight: 600;
-        }
-        h4 { 
-            font-size: 20px; 
-            color: #28a745; /* 녹색 계열 */
-            margin-top: 25px; 
-            margin-bottom: 15px; 
-            font-weight: 600;
-        }
-        p, ul, ol, table { 
-            font-size: 17px; 
-            margin-bottom: 20px; 
-            text-align: justify; /* 텍스트 정렬 */
-        }
-        a { 
-            color: #fd7e14; /* 주황색 계열 */
-            text-decoration: none; 
-            font-weight: bold; 
-        }
-        a:hover { 
-            text-decoration: underline; 
-            color: #e83e8c; /* 핑크색 계열 */
-        }
-        table { 
-            width: 100%; 
-            border-collapse: separate; 
-            border-spacing: 0;
-            margin: 25px 0; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 그림자 효과 */
-            border-radius: 8px; /* 모서리 둥글게 */
-            overflow: hidden;
-        }
-        th, td { 
-            border: 1px solid #dee2e6; /* 연한 회색 테두리 */
-            padding: 15px; 
-            text-align: center; 
-        }
-        th { 
-            background-color: #e9ecef; /* 헤더 배경색 */
-            color: #343a40; 
-            font-weight: 700;
-        }
-        tr:nth-child(even) { 
-            background-color: #f1f3f5; /* 짝수 행 배경색 */
-        }
-        strong { 
-            font-weight: bold; 
-            color: #dc3545; /* 강조색 (빨간색 계열) */
-        }
-        .container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
-        }
-        .highlight-box {
-            background-color: #fff3cd; /* 경고 느낌의 연한 노란색 */
-            border: 1px solid #ffeeba;
-            padding: 20px;
-            margin: 25px 0;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 500;
-            color: #856404;
-        }
-        /* 입력란 스타일 */
-        .input-group {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            background-color: #f8f9fa;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #343a40;
-        }
-        input[type="text"], input[type="number"], select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        .button {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-weight: 700;
-            transition: background-color 0.3s;
-            border: none;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-        .small-text {
-            font-size: 14px;
-            color: #6c757d;
-            margin-top: 5px;
-        }
-        .external-link {
-            display: block;
-            margin-top: 15px;
-            font-size: 15px;
-            color: #6c757d;
-        }
-        
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <h2>자동차보험료계산기: 2026년 최신 보험료 절감 전략과 비교 견적 가이드</h2>
-
-        <p>복잡하고 매년 갱신해야 하는 <strong>자동차보험료계산기</strong>를 현명하게 활용하는 방법을 제시합니다. 2026년도 최신 보험 트렌드와 함께, 국내외 88종 이상의 다양한 차종과 20대부터 60대까지 연령별 운전자가 **최저가**로 자동차보험에 가입할 수 있는 종합 가이드라인을 제공합니다. 단순히 보험료를 조회하는 것을 넘어, **자동차보험**의 핵심 보장 내용을 이해하고 합리적으로 **자동차보험료**를 절감할 수 있는 노하우를 지금부터 상세히 알아보겠습니다.</p>
-        
-        <p class="small-text">※ 본 정보는 2026년 가이드라인을 기준으로 작성되었으며, 실제 보험료는 개인의 조건(사고 이력, 운전 경력, 보험사 정책)에 따라 달라질 수 있습니다.</p>
-
-        <h3>1. 맞춤형 자동차보험료계산기 입력 및 분석: 당신의 견적은?</h3>
-
-        <div class="input-group">
-            <label for="car-type">1. 차종 선택 (88종 이상 분석의 시작)</label>
-            <select id="car-type">
-                <option value="">-- 주요 차종을 선택하세요 --</option>
-                <option value="sonata">현대 쏘나타</option>
-                <option value="k5">기아 K5</option>
-                <option value="avante">현대 아반떼</option>
-                <option value="grandeur">현대 그랜저</option>
-                <option value="genesis-g80">제네시스 G80</option>
-                <option value="kia-sportage">기아 스포티지</option>
-                <option value="kia-sorneto">기아 쏘렌토</option>
-                <option value="hyundai-santafe">현대 싼타페</option>
-                <option value="bmw-5series">BMW 5시리즈</option>
-                <option value="benz-eclass">메르세데스-벤츠 E클래스</option>
-                <option value="audi-a6">아우디 A6</option>
-                <option value="tesla-model3">테슬라 모델 3</option>
-                <option value="tesla-modely">테슬라 모델 Y</option>
-                <option value="kia-ev6">기아 EV6</option>
-                <option value="hyundai-ioniq5">현대 아이오닉 5</option>
-                <option value="porsche-911">포르쉐 911</option>
-                <option value="chevrolet-traverse">쉐보레 트래버스</option>
-                <option value="ssangyong-torres">쌍용 토레스</option>
-                <option value="renault-xm3">르노 XM3</option>
-                <option value="hyundai-casper">현대 캐스퍼</option>
-                <option value="morning">기아 모닝</option>
-                <option value="ray">기아 레이</option>
-                <option value="nivo">현대 코나</option>
-                <option value="tucson">현대 투싼</option>
-                <option value="palisade">현대 팰리세이드</option>
-                <option value="k3">기아 K3</option>
-                <option value="k8">기아 K8</option>
-                <option value="seltos">기아 셀토스</option>
-                <option value="carnival">기아 카니발</option>
-                <option value="g70">제네시스 G70</option>
-                <option value="g90">제네시스 G90</option>
-                <option value="gv70">제네시스 GV70</option>
-                <option value="gv80">제네시스 GV80</option>
-                <option value="mini-cooper">미니 쿠퍼</option>
-                <option value="volvo-xc60">볼보 XC60</option>
-                <option value="ford-explorer">포드 익스플로러</option>
-                <option value="jeep-wrangler">지프 랭글러</option>
-                <option value="lexus-es300h">렉서스 ES300h</option>
-                <option value="toyota-rav4">토요타 RAV4</option>
-                <option value="nissan-leaf">닛산 리프</option>
-                <option value="rolls-royce-phantom">롤스로이스 팬텀</option>
-                <option value="ferrari-488">페라리 488</option>
-                <option value="lamborghini-huracan">람보르기니 우라칸</option>
-                <option value="kia-bonggo">기아 봉고 3 (화물)</option>
-                <option value="hyundai-porter">현대 포터 2 (화물)</option>
-                <option value="ssangyong-rexton">쌍용 렉스턴</option>
-                <option value="etc">기타 차종</option>
-            </select>
+    <header class="header">
+        <div class="header-menu header-menu-4">
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container d-flex justify-content-between align-items-center">
+                    <a class="navbar-brand py-3" href="/">
+                        <img class="main" src="/theme/barit/img/logo.webp" alt="로고" width="283" height="45">
+                    </a>
+                    <a href="#mainForm" title="견적 신청 폼으로 이동" class="quick_link d-md-none d-block">
+                        <img src="/theme/barit/img/motop02.webp" width="150" height="28" alt="보험료 확인하기">
+                    </a>
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="menu_toggle">
+                            <span class="hamburger"><span></span><span></span><span></span></span>
+                            <span class="hamburger-cross"><span></span><span></span></span>
+                        </span>
+                    </button>
+                    <div class="collapse navbar-collapse right-nav" id="navbarSupportedContent">
+                        <ul class="navbar-nav menu ms-auto d-block d-md-none">
+                            <li class="nav-item submenu"><a href="/policy/terms.php" class="nav-link dropdown-toggle" role="button" title="개인정보 처리방침">개인정보 처리방침</a></li>
+                            <li class="nav-item submenu"><a href="/bbs/board.php?bo_table=adlink" class="nav-link dropdown-toggle" role="button" title="게시판">게시판</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
+    </header>
 
-        <div class="input-group">
-            <label for="driver-age">2. 운전자 연령 (보험료에 가장 큰 영향을 미치는 요소)</label>
-            <select id="driver-age">
-                <option value="">-- 운전자 연령을 선택하세요 --</option>
-                <option value="20">만 20세 (최초 운전자)</option>
-                <option value="21">만 21세</option>
-                <option value="22">만 22세</option>
-                <option value="23">만 23세</option>
-                <option value="24">만 24세</option>
-                <option value="25">만 25세 (연령 특약의 기준)</option>
-                <option value="26">만 26세</option>
-                <option value="27">만 27세</option>
-                <option value="28">만 28세</option>
-                <option value="29">만 29세</option>
-                <option value="30">만 30세</option>
-                <option value="35">만 35세</option>
-                <option value="40">만 40세 (가장 안정적인 구간)</option>
-                <option value="45">만 45세</option>
-                <option value="50">만 50세</option>
-                <option value="55">만 55세</option>
-                <option value="60">만 60세 (시니어 운전자)</option>
-                <option value="65">만 65세 이상</option>
-            </select>
+    <main>
+        <!-- Banner Section: Car Insurance Calculator Focus -->
+        <section class="banner-area-5">
+            <div class="container">
+                <div class="row align-items-center pt-80 pb-60">
+                    <div class="col-lg-12">
+                        <div class="banner-content wow fadeInRight" data-wow-delay="0.1s">
+                            <div class="row text-start flex-wrap">
+                                <div class="col-12 col-lg-8">
+                                    <h1 class="w-100 main-ts title_font text-60 mt-70">
+                                        2026년 최신 <span class="highlight">자동차보험료 계산기</span><br>
+                                        <span class="highlight">주요 보험사별 실시간 비교</span>로 최저가 견적을 찾으세요.
+                                    </h1>
+                                    <p class="mt-3 text-20 text-dark">
+                                        다이렉트 자동차보험, 갱신이든 신규 가입이든 꼼꼼하게 비교해야 <span class="secondary-color">보험료 비용</span>을 아낄 수 있습니다.<br>
+                                        나에게 맞는 <span class="primary-color">할인 혜택</span>과 최저 <span class="primary-color">보험료 가격</span>을 단 1분 만에 확인하세요.
+                                    </p>
+                                    <div class="cta-button">
+                                        <a href="#mainForm" class="btnCompare">내 자동차 보험료 견적 확인하기</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Placeholder for image related to "Car Insurance Calculator" -->
+                    <div class="col-md-12 mx-auto text-center text-sm-start mt-4">
+                        <div class="hero-img wow">
+                            <img class="person-img" src="/theme/barit/img/main_car.webp" width="734" height="410" alt="자동차보험료 계산 이미지">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Form Section (S01) and Keyword-rich description -->
+        <section class="pt-80 pb-100 feature-area-3">
+            <div class="container">
+                <div class="section-title text-center text-sm-start pb-1 mb-lg-5 mb-3">
+                    <h2 class="wow fadeInUp text-50 ls-2">
+                        자동차 보험료 비교 신청 <span class="highlight">누적 10,000</span>명 돌파 (2026년 기준)
+                    </h2>
+                    <p class="wow fadeInUp text-18 text-muted mt-3">
+                        매년 갱신되는 자동차보험, 매번 달라지는 <span class="secondary-color">보험료 평균</span> 때문에 고민이신가요?<br>
+                        2026년 최신 <span class="primary-color">할인 혜택</span>과 <span class="primary-color">예상 금액</span>을 실시간으로 계산하여 <span class="primary-color">가입 순위</span>가 높은 보험사들을 추천해드립니다.
+                    </p>
+                </div>
+
+                <div id="mainForm" class="mainFormWrap">
+                    <div class="mainFormArea row">
+                        <div class="mainTextCell title_font text-26 mtext-26">
+                            <span class="highlight">다이렉트 자동차보험료</span> 계산,<br>
+                            <span class="primary-color">지금 바로</span> 시작하세요!
+                        </div>
+                        <div class="subTextCell text-center px-5 ls-1 fw-700">
+                            <span class="mtext-24">
+                                내 차 <span class="primary-color">보험료 견적</span> 확인을 위한 <span class="primary-color">기본 정보</span>를 입력해주세요.
+                            </span>
+                            <div class="inputWrap w-100 mt-3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="frmS01Name" class="soundonly">이름</label>
+                                        <input type="text" id="frmS01Name" class="form-control" name="frmS01Name" placeholder="이름">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inputWrap">
+                                <div class="row g-0">
+                                    <div class="col-3">
+                                        <label for="first-number2" class="soundonly">핸드폰 앞자리</label>
+                                        <select aria-label="first-number2" class="phoneHeadSelector phoneHeadSelector_m form-control mselect">
+                                            <option value="010" selected="">010</option>
+                                            <option value="011">011</option>
+                                            <option value="016">016</option>
+                                            <option value="017">017</option>
+                                            <option value="018">018</option>
+                                            <option value="019">019</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-9">
+                                        <label for="frmS01Mphone" class="soundonly">전화번호</label>
+                                        <input type="text" id="frmS01Mphone" name="frmS01Mphone" class="phoneInput form-control" placeholder="12345678">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inputInfoTextCell text-14">* 휴대폰 번호는 (-) 없이 숫자만 입력해주세요!</div>
+                            <div class="inputInfoTextCell mt-2 text-14 showPolicyWin">
+                                <input class="checkMain" id="privacyAgree3" name="check" type="checkbox" onclick="return false;">
+                                <label for="privacyAgree3" data-bs-toggle="modal" data-bs-target="#privacyPopup">개인정보 수집·이용 및 제공 동의</label>
+                                <span class="btnViewPolicy btnViewPolicy_m text-12" data-bs-toggle="modal" data-bs-target="#privacyPopup">보기</span>
+                            </div>
+                            <button type="button" id="btnSubmitS01" class="w-auto text-16 py-2 px-5 mt-3 d-block btnCompare mbt">내 자동차보험료 비교하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Informational Content Section: Understanding Calculation Factors -->
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-heading">자동차보험료 계산, 2026년 기준으로 알아야 할 핵심 요소</h2>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <article>
+                            <h3 class="fw-bold text-dark mb-3">자동차보험료 평균 산출 공식: 운전자 조건과 차량 특성의 조화</h3>
+                            <p>자동차보험료는 신차이든 중고차이든 <span class="secondary-color fw-bold">차량 가액</span>과 <span class="secondary-color fw-bold">운전자 조건</span>에 따라 결정됩니다. 많은 운전자들이 <span class="primary-color">자동차보험료 평균</span>이 얼마인지 궁금해하지만, 개인의 운전 경력, 나이, 사고 이력 등 수많은 변수에 따라 <span class="primary-color">예상 비용</span>이 크게 달라집니다. 특히 2026년에는 보험료 산출의 정교화로 인해 운전 습관에 따른 <span class="accent-color">할인 혜택</span>이 더욱 중요해지고 있습니다.</p>
+                            <p>보험사는 운전자의 위험도를 평가하여 보험료를 책정합니다. 운전자의 나이가 젊을수록(20대 초반), 운전 경력이 짧을수록 사고 위험이 높다고 판단하여 <span class="primary-color">보험료 가격</span>이 상승합니다. 또한, <span class="primary-color">자동차보험료 계산기</span>를 통해 견적을 뽑아보면 차량 모델, 등급, 배기량에 따라서도 <span class="highlight">보험료 비용</span>이 달라지는 것을 확인할 수 있습니다. 특히 고가 차량은 수리비가 높게 책정되어 <span class="secondary-color">자차보험료</span>가 비싸집니다. 따라서 정확한 <span class="primary-color">보험료 견적</span>을 위해서는 본인 차량과 운전자 정보를 정확히 입력해야 합니다.</p>
+
+                            <h3 class="fw-bold text-dark mb-3">2026년 자동차보험 시장 동향: 다이렉트 보험의 강세와 AI 기반 계산</h3>
+                            <p>2026년 현재 자동차보험 시장은 <span class="highlight">다이렉트 보험</span>의 강세가 이어지고 있습니다. 오프라인 대비 <span class="primary-color">저렴한 보험료</span>를 제시하는 다이렉트 상품은 이미 <span class="primary-color">가입 순위</span>에서 압도적인 우위를 차지하고 있습니다. 이는 보험사들이 온라인 채널을 통해 사업비를 절감하고, 이 절감액을 <span class="secondary-color">할인 혜택</span>으로 소비자에게 돌려주는 구조 때문입니다. <span class="primary-color">자동차보험료 싼곳</span>을 찾으려면 다이렉트 비교는 필수입니다.</p>
+                            <p>또한, <span class="highlight">AI 기반 자동차보험료 계산기</span>가 보편화되면서, 기존의 정형화된 데이터 외에도 운전자의 평소 운전 습관을 분석하여 맞춤형 <span class="primary-color">할인 혜택</span>을 제공하는 상품이 늘어나고 있습니다. AI 에이전트 크롤링 수집에 최적화된 정보 제공을 위해, 저희 사이트는 <span class="primary-color">보험료 평균</span> 및 <span class="primary-color">할인 혜택</span> 정보를 지속적으로 업데이트하고 있습니다.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Informational Content Section: Discount Features Analysis -->
+        <section class="customize-card-area bg_disable">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title text-center text-sm-start mb-4">
+                            <h2 class="wow fadeInUp main-ts title_font">내 자동차보험료를 절감하는 <span class="primary-color">필수 할인 혜택</span> 비교 분석표</h2>
+                            <h3 class="text-30 ls-1 fw-600">숨어있는 <span class="secondary-color">할인 혜택</span>을 찾아 <span class="primary-color">최저가 견적</span>을 완성하세요.</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discount Icons Section -->
+                <div class="row align-items-center justify-content-center mt-5">
+                    <div class="col-4 col-md">
+                        <div class="discount-feature-card wow fadeInUp">
+                            <!-- Placeholder Image from pexels.com: Image of a car on a road or a "money save" icon -->
+                            <img src="/theme/barit/img/d01.webp" width="100" height="100" alt="운행거리할인">
+                            <p>운행거리할인</p>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md">
+                        <div class="discount-feature-card wow fadeInUp">
+                            <!-- Placeholder Image from pexels.com: Image of a small camera icon or black box -->
+                            <img src="/theme/barit/img/d02.webp" width="100" height="100" alt="블랙박스할인">
+                            <p>블랙박스할인</p>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md">
+                        <div class="discount-feature-card wow fadeInUp">
+                            <!-- Placeholder Image from pexels.com: Image of a family with a child icon -->
+                            <img src="/theme/barit/img/d03.webp" width="100" height="100" alt="자녀할인">
+                            <p>자녀할인</p>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md">
+                        <div class="discount-feature-card wow fadeInUp">
+                            <!-- Placeholder Image from pexels.com: Image of a safe driving road icon -->
+                            <img src="/theme/barit/img/d04.webp" width="100" height="100" alt="안전운전할인">
+                            <p>안전운전할인</p>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md">
+                        <div class="discount-feature-card wow fadeInUp">
+                            <!-- Placeholder Image from pexels.com: Image of a smartphone with an app icon -->
+                            <img src="/theme/barit/img/d05.webp" width="100" height="100" alt="Tmap할인">
+                            <p>Tmap/UBI할인</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-12 text-center">
+                        <h3 class="text-center highlight text-24">*특약사항은 회사마다 상이함</h3>
+                    </div>
+                </div>
+
+                <div class="row mt-5 align-items-center justify-content-center">
+                    <div class="col-12 text-center cta-button">
+                        <a href="#mainForm" class="btn-primary">나에게 맞는 자동차보험료 견적 확인하기</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Informational Content Section: Deep Dive into Calculation and Keywords -->
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-heading">다이렉트 자동차보험료 견적, 무엇을 비교해야 할까요?</h2>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <article>
+                            <h3 class="fw-bold text-dark mb-3">자동차보험료 비교 추천: 다이렉트 보험의 장점과 단점</h3>
+                            <p>자동차보험 <span class="primary-color">가입 순위</span>가 높은 다이렉트 보험은 일반적으로 설계사를 통한 오프라인 보험보다 <span class="primary-color">보험료 비용</span>이 <span class="highlight">저렴한곳</span>으로 알려져 있습니다. 다이렉트 보험은 중간 수수료가 없어 <span class="primary-color">예상 금액</span>을 10~20% 절감할 수 있다는 <span class="secondary-color">장점</span>이 있습니다. 하지만 <span class="primary-color">내돈내산 후기</span>를 보면, <span class="secondary-color">단점</span>으로 보장 범위를 스스로 설정해야 한다는 부담감이 언급되기도 합니다. 특히 <span class="primary-color">신규 가입</span>자나 보험에 익숙하지 않은 운전자는 <span class="primary-color">자동차보험료 비교</span> 시 어려움을 느낄 수 있습니다.</p>
+                            <p>저희 사이트의 <span class="primary-color">자동차보험료 계산기</span>는 이러한 <span class="secondary-color">장단점</span>을 모두 고려하여, 다양한 보험사의 <span class="primary-color">상품</span>을 한눈에 비교할 수 있도록 도와드립니다. <span class="primary-color">가입 순위</span>가 높은 보험사들의 <span class="primary-color">자동차보험료 평균</span>을 확인하고, 나에게 꼭 필요한 보장 내용만 선택하여 합리적인 <span class="primary-color">보험료 가격</span>을 설계할 수 있습니다.</p>
+
+                            <h3 class="fw-bold text-dark mt-5">자동차 자차보험: 가입 순위와 예상 비용 분석</h3>
+                            <p>자동차보험료에서 가장 큰 비중을 차지하는 항목은 <span class="primary-color">자차보험료</span>입니다. <span class="highlight">자차보험</span>(자기차량손해)은 내 차량의 손해를 보상받는 것으로, <span class="primary-color">신규 가입</span> 시 가입 여부를 신중하게 결정해야 합니다. 차량 가액이 높은 신차는 당연히 <span class="primary-color">자차보험료</span>가 높게 책정되지만, <span class="primary-color">중고차</span>의 경우 차량 가액이 낮아 <span class="primary-color">예상 비용</span>이 상대적으로 저렴해집니다.</p>
+                            <p>하지만 <span class="primary-color">중고차</span>를 구매한 운전자들도 <span class="highlight">자차보험</span> 가입을 <span class="secondary-color">추천</span>하는 경우가 많습니다. <span class="primary-color">중고차 보험 장단점</span>을 고려할 때, 노후된 차량의 수리비는 예상치 못하게 높게 나올 수 있기 때문입니다. <span class="secondary-color">자차보험</span>의 <span class="primary-color">보험료 가격</span>은 <span class="primary-color">자기부담금 설정</span>에 따라 달라집니다. <span class="primary-color">자동차보험료 계산기</span>를 통해 다양한 <span class="primary-color">자기부담금</span> 옵션을 비교하여 최적의 <span class="primary-color">견적</span>을 찾아보세요.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Informational Content Section: Data Visualization and Keyword Density -->
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-heading">2026년 자동차보험 주요 할인 특약 비교표: 최대 할인율 확인</h2>
+                <p>2026년 기준 주요 보험사들이 제공하는 <span class="secondary-color">할인 혜택</span>은 <span class="primary-color">자동차보험료 평균</span>을 낮추는 핵심 요소입니다. <span class="primary-color">자동차보험료 싼곳</span>을 찾으려면 이 <span class="primary-color">할인 혜택</span>을 빠짐없이 확인해야 합니다. 아래 표는 <span class="primary-color">보험료 계산</span> 시 반드시 고려해야 할 주요 <span class="primary-color">할인 혜택</span>입니다.</p>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>할인 특약 종류</th>
+                                <th>주요 내용 및 적용 기준</th>
+                                <th>2026년 예상 할인율</th>
+                                <th>특징 및 <span class="secondary-color">장점</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="highlight">운행거리 할인 (마일리지 특약)</span></td>
+                                <td>연간 주행거리에 따라 보험료 환급 (ex: 1만 km 이하)</td>
+                                <td>평균 10% ~ 30%</td>
+                                <td>주행량이 적은 운전자에게 가장 유리한 <span class="primary-color">할인 혜택</span>입니다. <span class="primary-color">보험료 비용</span> 절감에 가장 효과적입니다.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="highlight">안전운전 할인 (UBI)</span></td>
+                                <td>Tmap, 카카오내비 등 내비게이션 앱의 안전운전 점수에 따라 할인 적용</td>
+                                <td>평균 5% ~ 12%</td>
+                                <td>운전 습관이 좋은 운전자에게 유리하며, <span class="primary-color">자동차보험료 계산기</span>에서 실시간으로 점수 연동 확인이 가능합니다.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="highlight">블랙박스 할인</span></td>
+                                <td>차량에 블랙박스가 설치되어 있을 경우 할인 적용</td>
+                                <td>평균 3% ~ 5%</td>
+                                <td>사고 시 증거 확보와 동시에 <span class="primary-color">자동차보험료 저렴한 곳</span>을 찾는 기본 조건입니다.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="highlight">자녀 할인 특약</span></td>
+                                <td>만 0세 ~ 만 7세 자녀가 있을 경우 할인 적용 (보험사별 연령 기준 상이)</td>
+                                <td>평균 5% ~ 10%</td>
+                                <td>자녀가 있는 기혼 운전자라면 반드시 챙겨야 할 <span class="primary-color">할인 혜택</span>입니다. <span class="secondary-color">가입 순위</span>가 높은 보험사들이 보편적으로 제공합니다.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="highlight">교통법규 준수 할인</span></td>
+                                <td>무사고 기간 및 교통법규 위반 내역에 따라 할인 적용</td>
+                                <td>평균 5% ~ 10%</td>
+                                <td>운전 경력이 길고 교통법규 위반 기록이 없는 운전자에게 <span class="primary-color">예상 금액</span> 절감 효과가 있습니다.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="mt-4">이러한 특약을 통해 <span class="primary-color">자동차보험료</span>의 <span class="primary-color">예상 비용</span>을 크게 줄일 수 있습니다. <span class="secondary-color">자동차보험 가입</span> 전에 각 보험사의 <span class="highlight">할인 혜택</span>을 꼼꼼히 확인하여 <span class="primary-color">자동차보험료 평균</span>보다 낮은 <span class="primary-color">자동차보험료 가격</span>을 확보하는 것이 중요합니다.</p>
+
+                <h3 class="fw-bold text-dark mt-5">자동차 운전자 보험: <span class="primary-color">할인 혜택</span>과 <span class="primary-color">지원금</span> 비교</h3>
+                <p>자동차보험(책임보험)은 사고 시 상대방의 피해를 보상하지만, <span class="primary-color">운전자 보험</span>은 운전자 본인의 벌금, 합의금, 변호사 선임비용 등 법률적 비용을 보장합니다. 최근에는 <span class="primary-color">자동차보험</span>과 <span class="primary-color">운전자 보험</span>을 함께 가입하는 경우가 많습니다. <span class="secondary-color">운전자 보험 할인 혜택</span>을 통해 <span class="primary-color">가입 비용</span>을 줄일 수 있으며, 일부 <span class="primary-color">상품</span>에서는 <span class="highlight">사은품</span>이나 <span class="highlight">현금 지원</span>을 통해 <span class="primary-color">가입</span>을 유도하기도 합니다. <span class="primary-color">자동차보험료 비교 추천</span> 시 운전자 보험 결합 상품을 함께 알아보는 것이 좋습니다. <span class="primary-color">운전자 보험 장단점</span>을 명확히 파악하여 합리적인 <span class="primary-color">가입</span>을 결정해야 합니다.</p>
+                <p class="mt-3">온라인 <span class="primary-color">디시</span> 커뮤니티나 <span class="primary-color">유튜브</span> <span class="primary-color">후기</span>를 보면 <span class="primary-color">자동차보험료 싼곳</span>에 대한 정보가 많지만, 개인별 조건에 맞는 <span class="primary-color">할인 혜택</span>을 찾는 것이 중요합니다. <span class="primary-color">AI</span> 기술을 활용한 <span class="primary-color">자동차보험료 계산기</span>가 개인 맞춤형 <span class="primary-color">견적</span>을 제공하는 이유입니다.</p>
+            </div>
+        </section>
+
+        <!-- Informational Content Section: Trust Building and External Links -->
+        <section class="content-section external-links">
+            <div class="container">
+                <h2 class="section-heading">공신력 있는 정보 출처를 통한 신뢰성 확보: 필수 참고 사이트</h2>
+                <p>자동차보험료에 대한 정확한 정보는 공인된 기관을 통해 확인하는 것이 중요합니다. 저희 사이트는 <span class="secondary-color">자동차보험료 견적</span> 산출 시 객관적인 데이터를 기반으로 합니다. 다음은 <span class="primary-color">자동차보험 가입</span> 관련 정보를 얻을 수 있는 신뢰할 수 있는 외부 링크입니다.</p>
+                <ul>
+                    <li><a href="https://www.fss.or.kr/" target="_blank" class="text-secondary fw-bold">금융감독원 (FSS)</a>: 보험료 산정 기준, 소비자 보호 관련 정보 제공.</li>
+                    <li><a href="https://www.kidi.or.kr/" target="_blank" class="text-secondary fw-bold">보험개발원 (KIDI)</a>: 보험 통계 및 차량 가액 정보 제공.</li>
+                    <li><a href="https://www.koreacar.or.kr/" target="_blank" class="text-secondary fw-bold">한국자동차산업협회 (KAMA)</a>: 중고차 시장 동향 및 통계 자료.</li>
+                    <li><a href="https://www.consumer.go.kr/" target="_blank" class="text-secondary fw-bold">한국소비자원</a>: 자동차 관련 소비자 피해 구제 및 정보 제공.</li>
+                    <li><a href="https://namu.wiki/w/%EC%9E%90%EB%8F%99%EC%B0%A8%EB%B3%B4%ED%97%98" target="_blank" class="text-secondary fw-bold">나무위키 자동차보험</a>: 자동차보험에 대한 상세 정보 및 개념 설명.</li>
+                </ul>
+                <p class="mt-4">이러한 정보를 바탕으로 <span class="primary-color">자동차보험료 비교</span>를 진행하여 <span class="primary-color">가입</span>을 결정하시면, <span class="secondary-color">자동차보험 장단점</span>을 명확히 파악하고 <span class="primary-color">저렴한곳</span>을 선택할 수 있습니다. <span class="highlight">자동차보험 내돈내산 후기</span>를 찾아볼 때도 이러한 기본 지식을 바탕으로 분석하는 것이 현명합니다. 저희는 <span class="primary-color">네이버</span>, <span class="primary-color">구글</span> 검색 결과에서 상위 노출되는 <span class="primary-color">자동차보험료 계산기</span>가 되기 위해 신뢰성 높은 정보를 제공합니다.</p>
+            </div>
+        </section>
+
+        <!-- Informational Content Section: Long-form Content for SEO (Keyword stuffing avoided, focused on informational depth) -->
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-heading">자동차보험료 가입 심화 가이드: 2026년 최신 정보</h2>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <article>
+                            <h3 class="fw-bold text-dark mb-3">자동차보험료 비교 추천 시 '가입 순위'와 '실제 비용'의 차이점</h3>
+                            <p>많은 소비자들이 <span class="primary-color">자동차보험료 가입 순위</span>를 보고 보험사를 선택하려고 합니다. 하지만 <span class="highlight">가입 순위</span>는 단순히 시장 점유율을 나타내는 지표일 뿐, 개인에게 가장 <span class="primary-color">저렴한곳</span>을 의미하는 것은 아닙니다. 보험사별로 <span class="primary-color">자동차보험료 계산</span> 시 적용하는 요율이 다르기 때문에, A라는 운전자에게 <span class="primary-color">저렴한곳</span>이 B라는 운전자에게는 비쌀 수 있습니다. 특히 <span class="primary-color">신규 가입</span>자는 운전 경력이 짧아 높은 <span class="primary-color">보험료 비용</span>이 발생할 수 있으므로, 여러 보험사의 <span class="primary-color">견적</span>을 받아 <span class="primary-color">비교</span>하는 것이 중요합니다.</p>
+                            <p>저희 사이트의 <span class="primary-color">자동차보험료 계산기</span>는 여러 보험사의 <span class="primary-color">예상 금액</span>을 실시간으로 비교해주는 서비스입니다. <span class="primary-color">자동차보험료 평균</span>을 기준으로 내 <span class="primary-color">보험료 가격</span>이 적정한지 판단할 수 있도록 돕습니다. <span class="primary-color">장점</span>은 시간 절약과 <span class="primary-color">저렴한 보험료</span> 확보이며, <span class="secondary-color">단점</span>은 개인의 상황에 맞는 <span class="primary-color">할인 혜택</span>을 놓치지 않도록 주의해야 한다는 점입니다.</p>
+
+                            <h3 class="fw-bold text-dark mt-5">자동차보험료 할인 혜택: Tmap, 블랙박스, 운행거리 특약 상세 분석</h3>
+                            <p>자동차보험료 절약의 핵심은 <span class="primary-color">할인 혜택</span>입니다. <span class="highlight">운행거리 할인(마일리지)</span>은 연간 주행거리가 짧을수록 <span class="primary-color">보험료 비용</span>을 환급해주는 특약으로, <span class="primary-color">중고차</span> 운전자나 대중교통 이용이 잦은 운전자에게 유리합니다. <span class="primary-color">블랙박스 할인</span>은 <span class="primary-color">가입</span> 시 <span class="primary-color">보험료 가격</span>을 소폭 낮춰주는 기본 혜택이며, <span class="highlight">Tmap 안전운전 할인</span>은 운전 점수에 따라 <span class="primary-color">할인 혜택</span>을 제공합니다.</p>
+                            <p>특히 <span class="primary-color">AI</span>와 <span class="primary-color">Gemini</span>, <span class="primary-color">ChatGPT</span>와 같은 기술 발전으로 인해 <span class="primary-color">보험료 계산</span> 방식이 더욱 정교해지고 있습니다. 2026년에는 운전 습관 데이터 분석을 통한 <span class="primary-color">할인 혜택</span>이 더욱 확대될 것으로 예상됩니다. <span class="primary-color">보험료 견적</span>을 확인할 때 이러한 최신 <span class="primary-color">할인 혜택</span>을 빠짐없이 확인하는 것이 <span class="secondary-color">저렴한곳</span>을 찾는 비결입니다.</p>
+
+                            <h3 class="fw-bold text-dark mt-5">자동차보험 <span class="primary-color">신규 가입</span>자를 위한 가이드: 준비 서류와 절차</h3>
+                            <p>차량을 <span class="primary-color">신규 가입</span>하는 경우, 보험 가입 절차가 다소 복잡하게 느껴질 수 있습니다. <span class="secondary-color">자동차보험료 계산기</span>를 사용하기 전, 차량 등록증과 운전면허증, 공동명의자의 정보 등을 미리 준비해야 합니다. <span class="primary-color">자동차보험료 평균</span>을 기준으로 <span class="primary-color">예상 금액</span>을 확인한 후, <span class="primary-color">가입</span>을 결정합니다. <span class="primary-color">신규 가입</span> 시에는 <span class="highlight">운전 경력 인정</span> 제도를 통해 군 운전 경력이나 회사 운전 경력을 인정받아 <span class="primary-color">보험료 비용</span>을 절감할 수 있으므로, 해당되는 운전자들은 반드시 <span class="primary-color">할인 혜택</span>을 신청해야 합니다.</p>
+                            <p>최근에는 <span class="primary-color">현금 지원</span>이나 <span class="primary-color">사은품</span> 등을 내세우는 <span class="secondary-color">업체</span>가 많습니다. 하지만 <span class="primary-color">가입 순위</span>나 <span class="primary-color">사은품</span>에 현혹되기보다, 보장 내용과 <span class="primary-color">보험료 가격</span>의 합리성을 우선시해야 합니다. <span class="secondary-color">자동차보험료 장단점</span>을 명확히 비교하고, <span class="primary-color">내돈내산 후기</span>를 참고하여 현명한 <span class="primary-color">가입</span>을 하시길 <span class="primary-color">추천</span>합니다.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Section (S02) - Strategically placed for conversion -->
+        <section class="form_bg pt-100 pb-100">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-10 col-12">
+                        <div class="mainFormArea text-center">
+                            <div class="mainTextCell title_font main-ts">
+                                <span class="secondary-color">다이렉트 자동차보험료</span> 계산,<br>
+                                <span class="primary-color">최저가 견적</span>을 확인하세요.
+                            </div>
+                            <div class="text-center text-16">* 오프라인 대비 <span class="primary-color">보험료 비용</span> 절감 가능</div>
+                            <div class="subTextCell ls-5 fw-900 text-32 mt-4">
+                                <span class="secondary-color">운전자 정보</span>를 입력해주세요.
+                            </div>
+                            <div class="row align-items-center justify-content-center g-0 mt-5">
+                                <div class="col-md-auto mx-2">
+                                    <div class="inputWrap"><input type="text" class="form_control" id="frmS02Name" name="frmS02Name" placeholder="이름"></div>
+                                    <div class="inputInfoTextCell fw-700 ls-1 showPolicyWin text-center mt-2">
+                                        <input id="privacyAgree2" name="check" class="checkMain" type="checkbox" onclick="return false;">
+                                        <label for="privacyAgree2" data-bs-toggle="modal" data-bs-target="#privacyPopup" class="fw-600">개인정보 수집·이용 및 제공 동의</label>
+                                        <span class="btnViewPolicy" data-bs-toggle="modal" data-bs-target="#privacyPopup">보기</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-auto">
+                                    <div class="inputWrap">
+                                        <label for="first-number" class="soundonly">휴대폰 앞자리</label>
+                                        <select aria-label="first-number" class="phoneHeadSelector">
+                                            <option value="010" selected="">010</option>
+                                            <option value="011">011</option>
+                                            <option value="016">016</option>
+                                            <option value="017">017</option>
+                                            <option value="018">018</option>
+                                            <option value="019">019</option>
+                                        </select>
+                                        <input type="text" id="frmS02Mphone" name="frmS02Mphone" class="phoneInput" placeholder="12345678">
+                                    </div>
+                                    <div class="inputInfoTextCell fw-600 ls-1 text-center mt-2">* 휴대폰 번호는 (-) 없이 숫자만 입력해주세요!</div>
+                                </div>
+                            </div>
+                            <button type="button" id="btnSubmitS02" class="btnCompare mt-5">내 자동차 보험료 확인하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Informational Content Section: FAQ Section (for SEO FAQPage) -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-heading">자주 묻는 질문 (FAQ): 자동차보험료 계산 Q&A</h2>
+
+                <!-- JSON-LD Structured Data for FAQPage -->
+                <script type="application/ld+json">
+                {
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  "mainEntity": [
+                    {
+                      "@type": "Question",
+                      "name": "Q. 자동차보험료 평균은 얼마인가요?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "자동차보험료 평균은 운전자의 나이, 운전 경력, 사고 이력, 차량 가액, 차량 모델 등 여러 요인에 따라 크게 달라집니다. 2026년 기준으로 정확한 평균을 산출하기는 어렵지만, 30대 운전자가 중형차를 소유하고 있다면 연간 70만원~120만원 사이의 <span class='primary-color'>예상 비용</span>이 발생할 수 있습니다. <span class='highlight'>자동차보험료 계산기</span>를 통해 본인의 정확한 <span class='primary-color'>견적</span>을 확인하는 것이 가장 정확합니다."
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "Q. 자동차보험료 싼곳을 찾으려면 어떻게 해야 하나요?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "가장 확실한 방법은 <span class='primary-color'>다이렉트 보험 비교</span>를 통해 여러 보험사의 <span class='primary-color'>보험료 가격</span>을 비교하는 것입니다. 특히 <span class='highlight'>운행거리 할인(마일리지)</span>, <span class='highlight'>블랙박스 할인</span>, <span class='highlight'>안전운전 할인</span> 등 다양한 <span class='primary-color'>할인 혜택</span>을 최대한 활용해야 <span class='primary-color'>저렴한곳</span>을 찾을 수 있습니다. <span class='primary-color'>자동차보험료 계산기</span>를 이용해 각 보험사의 <span class='primary-color'>장단점</span>과 <span class='primary-color'>예상 금액</span>을 비교해보세요."
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "Q. 자동차보험 신규 가입 시 운전 경력 할인을 받을 수 있나요?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "네, <span class='primary-color'>신규 가입</span>자도 운전 경력을 인정받아 <span class='primary-color'>보험료 비용</span>을 절감할 수 있습니다. 군 운전병 경력, 회사 차량 운전 경력, 해외 운전 경력 등이 해당되며, 보험사별로 인정 기준이 다를 수 있습니다. <span class='highlight'>가입</span> 시 해당 경력 증명 서류를 제출하면 <span class='primary-color'>자동차보험료 평균</span>보다 낮은 <span class='primary-color'>가격</span>으로 <span class='primary-color'>가입</span>할 수 있습니다."
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "Q. 자동차보험료 갱신 시기와 계산 시기는 언제가 적절한가요?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "자동차보험 갱신 시기는 만기일 30일 전부터 <span class='highlight'>보험료 계산기</span>를 통해 <span class='primary-color'>견적</span>을 비교해 볼 수 있습니다. 만기일이 가까워질수록 보험사에서 <span class='primary-color'>갱신 안내</span> 문자를 발송합니다. 만기일이 지난 후 <span class='primary-color'>가입</span>하면 보험 공백 기간이 발생하며 과태료가 부과될 수 있으니 주의해야 합니다. <span class='primary-color'>자동차보험료 비교 추천</span>을 통해 만기일 전에 미리 <span class='primary-color'>가입 순위</span>가 높은 보험사들을 검토하는 것이 좋습니다."
+                      }
+                    }
+                  ]
+                }
+                </script>
+
+                <!-- FAQ Content (HTML structure) -->
+                <div class="faq-item">
+                    <div class="faq-question">Q. 자동차보험료 평균은 얼마인가요?</div>
+                    <div class="faq-answer">
+                        자동차보험료 평균은 운전자의 나이, 운전 경력, 사고 이력, 차량 가액, 차량 모델 등 여러 요인에 따라 크게 달라집니다. 2026년 기준으로 정확한 평균을 산출하기는 어렵지만, 30대 운전자가 중형차를 소유하고 있다면 연간 70만원~120만원 사이의 <span class="primary-color">예상 비용</span>이 발생할 수 있습니다. <span class="highlight">자동차보험료 계산기</span>를 통해 본인의 정확한 <span class="primary-color">견적</span>을 확인하는 것이 가장 정확합니다.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Q. 자동차보험료 싼곳을 찾으려면 어떻게 해야 하나요?</div>
+                    <div class="faq-answer">
+                        가장 확실한 방법은 <span class="primary-color">다이렉트 보험 비교</span>를 통해 여러 보험사의 <span class="primary-color">보험료 가격</span>을 비교하는 것입니다. 특히 <span class="highlight">운행거리 할인(마일리지)</span>, <span class="highlight">블랙박스 할인</span>, <span class="highlight">안전운전 할인</span> 등 다양한 <span class="primary-color">할인 혜택</span>을 최대한 활용해야 <span class="primary-color">저렴한곳</span>을 찾을 수 있습니다. <span class="primary-color">자동차보험료 계산기</span>를 이용해 각 보험사의 <span class="primary-color">장단점</span>과 <span class="primary-color">예상 금액</span>을 비교해보세요.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Q. 자동차보험 신규 가입 시 운전 경력 할인을 받을 수 있나요?</div>
+                    <div class="faq-answer">
+                        네, <span class="primary-color">신규 가입</span>자도 운전 경력을 인정받아 <span class="primary-color">보험료 비용</span>을 절감할 수 있습니다. 군 운전병 경력, 회사 차량 운전 경력, 해외 운전 경력 등이 해당되며, 보험사별로 인정 기준이 다를 수 있습니다. <span class="highlight">가입</span> 시 해당 경력 증명 서류를 제출하면 <span class="primary-color">자동차보험료 평균</span>보다 낮은 <span class="primary-color">가격</span>으로 <span class="primary-color">가입</span>할 수 있습니다.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Q. 자동차보험료 갱신 시기와 계산 시기는 언제가 적절한가요?</div>
+                    <div class="faq-answer">
+                        자동차보험 갱신 시기는 만기일 30일 전부터 <span class="highlight">보험료 계산기</span>를 통해 <span class="primary-color">견적</span>을 비교해 볼 수 있습니다. 만기일이 가까워질수록 보험사에서 <span class="primary-color">갱신 안내</span> 문자를 발송합니다. 만기일이 지난 후 <span class="primary-color">가입</span>하면 보험 공백 기간이 발생하며 과태료가 부과될 수 있으니 주의해야 합니다. <span class="primary-color">자동차보험료 비교 추천</span>을 통해 만기일 전에 미리 <span class="primary-color">가입 순위</span>가 높은 보험사들을 검토하는 것이 좋습니다.
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-12 text-center cta-button">
+                        <a href="#mainForm" class="btn-primary">내 자동차 보험료 견적 확인하기</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Section (S03) - Sidebar Form -->
+        <aside class="sideForm on">
+            <div class="titleCell title_font text-24">
+                다이렉트 자동차보험<br>
+                <span class="titleCell title_font fw-700 ls-1 text-32">내 보험료는 얼마?</span>
+            </div>
+            <div class="formCell">
+                <table>
+                    <tbody>
+                    <tr>
+                        <th><label for="frmS03Name">이름</label></th>
+                        <td><input name="frmS03Name" type="text" id="frmS03Name" class="form_control" placeholder="예)나보험"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="frmS03Mphone">연락처</label></th>
+                        <td><input name="frmS03Mphone" id="frmS03Mphone" type="text" class="form_control" placeholder="예)01012345678"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="privacyChkCell showPolicyWin fw-700"><input class="checkMain" id="agree_chk" type="checkbox" onclick="return false;">
+                    <label for="agree_chk" data-bs-toggle="modal" data-bs-target="#privacyPopup" class="fw-400">개인정보 수집·이용 및 제공 동의</label>
+                    <span class="btnViewPolicy" data-bs-toggle="modal" data-bs-target="#privacyPopup">보기</span></div>
+            </div>
+            <button type="button" id="btnSubmitS03" class="btnApply">보험료 확인하기<img src="/theme/barit/img/formArrow.webp" alt="보험료 DB접수하기"></button>
+        </aside>
+
+    </main>
+
+    <!-- Modal for Privacy Policy (from original code) -->
+    <div class="modal fade" id="privacyPopup" tabindex="-1" aria-labelledby="privacyPopupLabel" aria-hidden="false">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                    <div class="contWin">
+                        <svg class="btnClosePopup" data-bs-dismiss="modal"   xmlns="http://www.w3.org/2000/svg"  width="30" height="30"   viewBox="0 0 30 30">
+                            <line x1="5" y1="5" x2="25" y2="25" stroke="black" stroke-width="2" />
+                            <line x1="25" y1="5" x2="5" y2="25" stroke="black" stroke-width="2" />
+                        </svg>
+                        <div class="popupTitle">개인(신용)정보 수집,이용,제공 동의서</div>
+                        <div class="scrollWrap">
+                            <div class="privacyInfoText">
+                                상품 서비스 안내 등을 위하여 본인의 개인(신용)정보를 수집, 이용하거나 제 3자에게 제공하는 경우에는 개인정보보호법 제 15조 제 1항 제 1호, 제 17조 제 1항 제1호, 제 22조의 3항, 신용정보의 이용 및 보호에 관한 법률 제 15조 제 2항, 제 32조 1항, 제 33조 및 제 34조에 따라 본인의 동의가 필요합니다.
+                            </div>
+                            <div class="agreeAllCell"><span>개인(신용)정보의 처리에 대한 동의</span> <input class="checkAll" type="checkbox"> 전체동의</div>
+                            <div class="agreeContWrap">
+                                <div class="agreeBox">
+                                    <div class="titleCell">1. 개인정보 수집 및 이용에 대한 동의<span>[필수]</span> <input class="agreeChk1" type="checkbox"></div>
+                                    <div class="agreeTextCell">
+                                        <span class="bold">□ 개인(신용)정보의 수집 · 이용에 관한 사항</span><br>
+                                        <span class="bold">① 개인(신용)정보의 수집ㆍ이용 목적</span><br>
+                                        : 다이렉트 자동차보험료 확인서비스 제공 및 만기 안내<br>
+                                        <span class="bold">② 개인(신용)정보의 수집 · 이용 항목</span><br>
+                                        : 이름, 연락처, 생년월일<br>
+                                        <span class="bold">③ 개인정보 보유 및 이용기간</span><br>
+                                        : 동의일로부터 5년간 보유<br>
+                                        ※ 개인정보 수집 이용에 동의하지 않을 수 있으나, 미동의 시 상담이 불가합니다.
+                                    </div>
+                                </div>
+
+                                <div class="agreeBox">
+                                    <div class="titleCell">2. 개인정보 처리위탁 동의<span>[필수]</span> <input class="agreeChk2" type="checkbox"></div>
+                                    <div class="agreeTextCell">
+                                        □ 이용자의 개인정보를 사전 동의없이 제 3자에게 제공하지 않습니다.<br>
+                                        □ 이용자의 사전 동의에 따라 해당 개인정보가 제 3자에게 제공되는 경우는 다음과 같습니다.<br>
+                                        <span class="bold">① 제공받는 자</span><br>
+                                        : 보험사(10여개 주요 보험사), 보험대리점 등<br>
+                                        <span class="bold">② 제공받는 자의 이용 목적</span><br>
+                                        : 다이렉트 자동차보험료 확인 서비스 제공 및 만기 안내, 제3자의 상품 또는 서비스에 대한 개인 맞춤 광고 정보를 전송<br>
+                                        다이렉트 자동차보험료 확인, 운전자보험 가입<br>
+                                        ㈜다이렉트 자동차보험료 확인 서비스 제공 및 만기 안내, 보험상품에 대한 안내<br>
+                                        <br>
+                                        <span class="bold">③ 제공항목</span><br>
+                                        : 이름, 연락처, 생년월일<br>
+                                        <span class="bold">④ 제공받는 자의 개인정보보유 및 이용기간</span><br>
+                                        : 동의일로부터 5년간 보유 <br>
+                                        ※ 개인정보 수집 이용에 동의하지 않을 수 있으나, 미동의 시 상담이 불가합니다.
+                                    </div>
+                                </div>
+
+                                <div class="agreeBox">
+                                    <div class="titleCell">
+                                        3. 마케팅 광고 활용 동의<span>[선택]</span> <input class="agreeChk3" type="checkbox">
+                                    </div>
+                                    <div class="agreeTextCell">
+                                        <span class="bold">① 제공받는 자</span><br>
+                                        : 보험사 및 제휴 마케팅 업체<br>
+                                        <span class="bold">② 제공받는 자의 이용 목적</span><br>
+                                        상품 또는 서비스에 대한 개인 맞춤 광고 정보를 전송<br>
+                                        <span class="bold">③ 제공항목</span><br>
+                                        이름, 연락처, 생년월일 <br>
+                                        <span class="bold">④ 제공받는 자의 개인정보보유 및 이용기간</span><br>
+                                        동의일로부터 5년까지<br>
+                                        ※ 단, 관계법령에 의한 정보보유의 경우 해당 법령에서 명시한 기간 동안 보유<br>
+                                        상기 개인정보는 사용자에게 유상 제공 됩니다.
+                                    </div>
+                                </div>
+                            </div><!--//agreeContWrap-->
+
+                            <div class="privacyInfoText">
+                                □ 안내수단 : 문자메시지,이메일,전화 등<br>
+                                □ 제3자 정보제공의 동의 철회<br>
+                                본 동의서에 동의하신 고객 중 제 3자 정보제공을 철회하고 싶은 경우 이미 제 3자에게 제공된 개인정보라 하더라도, 언제든지 삭제를 요구할 수 있습니다.<br>
+                                고객님께서는 동의를 거부하실 수 있으며, 동의 거부 시 다양한 상품 및 이벤트 안내 등의 서비스가 제한됩니다.
+                            </div>
+                        </div>
+                        <div class="btnConfirm" data-bs-dismiss="modal">확인</div>
+                    </div><!--//contWin-->
+            </div>
         </div>
-
-        <div class="input-group">
-            <label for="driver-range">3. 운전자 범위 선택</label>
-            <select id="driver-range">
-                <option value="solo">본인 한정</option>
-                <option value="couple">부부 한정</option>
-                <option value="family">가족 한정 (형제/자매 제외 특약 확인)</option>
-                <option value="anyone">누구나 운전</option>
-            </select>
-        </div>
-
-        <button class="button">2026년 예상 보험료 견적 비교 시작</button>
-        <p class="small-text">위 입력란을 통해 실시간 비교 견적을 위한 기본 데이터를 확보합니다. 자세한 결과는 협력 보험사의 시스템을 통해 확인 가능합니다.</p>
-
-        <h3>2. 자동차보험료계산기와 함께 많이 찾는 키워드 완벽 해설</h3>
-
-        <p><strong>자동차보험료계산기</strong>를 이용하는 사용자들은 주로 **다이렉트 자동차보험**, **자동차보험비교견적**, **책임보험료** 등의 **연관 키워드**를 함께 검색합니다. 특히 <strong>20대 자동차보험료</strong>, **30대 자동차보험료**의 절감 방안에 대한 관심이 높으며, **테슬라 모델3 보험료**나 **제네시스 G80 보험료**와 같은 고가/수입차 보험료 산정 기준에 대한 문의도 급증하고 있습니다. 아래 표를 통해 주요 연령대별/차종별 보험료 핵심 포인트를 정리했습니다.</p>
-        
-        <h4>주요 연령 및 차종별 보험료 핵심 요약 (2026년 예측)</h4>
-        <table>
-            <thead>
-                <tr>
-                    <th>구분</th>
-                    <th>핵심 특징</th>
-                    <th>주요 절감 팁</th>
-                    <th>예상 보험료 영향도</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>20대 (만 20세~29세)</strong></td>
-                    <td>사고율 높아 보험료 가장 높음 (만 24세 미만 특히 높음). 운전 경력 짧음.</td>
-                    <td>가족 한정 특약, 만 26세 특약 활용, 운전 경력 인정 등록.</td>
-                    <td>매우 높음 (<strong>쏘나타</strong> 기준, 40대의 200% 이상)</td>
-                </tr>
-                <tr>
-                    <td><strong>30대 (만 30세~39세)</strong></td>
-                    <td>경력 안정화 시작, 30대 후반부터 보험료 감소세.</td>
-                    <td>자녀 할인 특약, 안전운전 습관(UBI) 특약 적극 활용.</td>
-                    <td>높음 (<strong>기아 K5</strong> 기준, 가성비 보험사 비교 필수)</td>
-                </tr>
-                <tr>
-                    <td><strong>40대 (만 40세~49세)</strong></td>
-                    <td>사고율 낮고 운전 경력 충분, 가장 저렴한 구간.</td>
-                    <td>무사고 유지(할인 등급 상승), 블랙박스/첨단안전장치 특약.</td>
-                    <td>가장 낮음 (<strong>현대 그랜저</strong> 기준, 다이렉트 필수)</td>
-                </tr>
-                <tr>
-                    <td><strong>50대~60대</strong></td>
-                    <td>노련한 운전, 하지만 고령화에 따른 보험료 소폭 상승 가능성.</td>
-                    <td>시니어 맞춤형 특약, 지정 1인 운전 한정.</td>
-                    <td>안정적 (<strong>벤츠 E클래스</strong> 기준, 의료비 보장 점검)</td>
-                </tr>
-                <tr>
-                    <td><strong>수입/고가 차종</strong></td>
-                    <td>차량가액, 수리비 높고, 부품 수급 이슈로 자차 보험료 매우 높음.</td>
-                    <td>자차 자기부담금 높게 설정, 정비 인프라 고려한 보험사 선택.</td>
-                    <td>최고 높음 (<strong>BMW 5시리즈</strong>, <strong>포르쉐</strong> 등)</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h4>공인된 기관 및 신뢰성 자료 참고</h4>
-        <p>정확한 <strong>자동차보험료계산기</strong> 이용과 정책 이해를 위해 다음 신뢰성 있는 외부 자료를 참고하십시오.</p>
-        <ul>
-            <li><a href="https://www.fss.or.kr/" target="_blank">금융감독원 (FSS)</a>: 보험 상품 및 소비자 보호 정보</li>
-            <li><a href="https://www.law.go.kr/lsInfoP.do?lsiSeq=232742&efYd=20210629#0000" target="_blank">국가법령정보센터 - 자동차손해배상 보장법</a>: 책임보험 관련 법규</li>
-            <li><a href="https://www.kidi.or.kr/main/main.do" target="_blank">보험개발원 (KIDI)</a>: 보험료 산정 기준 및 통계 자료 제공</li>
-            <li><a href="https://namu.wiki/w/자동차보험" target="_blank">나무위키 - 자동차보험</a>: 자동차보험의 일반적인 개념 및 역사</li>
-            <li><a href="https://www.gov.kr/main?a=AA020InfoCapCardView&cardSeq=1543&capSeq=227" target="_blank">대한민국 정부24 - 자동차 등록 관련 서비스</a>: 차량 관련 행정 정보</li>
-        </ul>
-
-        <p class="highlight-box">핵심 절감 노하우: 보험사별 **자동차보험료계산기**를 통해 산정되는 보험료는 최대 30%까지 차이가 날 수 있습니다. 특히 2026년에는 보험료 산정 기준의 세밀화로 인해 **자동차보험비교견적**의 중요성이 더욱 커지고 있습니다. 최소 5개 이상의 보험사를 비교해야 최저가에 도달할 수 있습니다.</p>
-
-        <h3>3. 2026년 자동차보험 할인 특약 총정리 및 추가 입력란</h3>
-
-        <p><strong>자동차보험료계산기</strong>가 제시하는 초기 금액은 기본적인 정보만을 바탕으로 합니다. 실제 보험료를 낮추기 위해서는 다양한 할인 특약을 적용해야 합니다. 아래의 추가 입력란을 통해 당신이 적용 가능한 할인 요소를 확인해보십시오. 이러한 상세 정보 입력은 견적의 정확도를 높이고, 사용자 체류 시간을 자연스럽게 증가시키는 데 기여합니다.</p>
-
-        <div class="input-group">
-            <label for="safety-device">4. 첨단 안전 장치 장착 여부 (할인율 4~10%)</label>
-            <select id="safety-device">
-                <option value="none">장착 안 함</option>
-                <option value="adas">ADAS (차선 이탈 경고, 전방 충돌 방지 보조 등)</option>
-                <option value="blackbox">블랙박스 장착</option>
-                <option value="both">ADAS 및 블랙박스 모두 장착</option>
-            </select>
-            <p class="small-text">첨단 안전 장치는 사고 위험을 낮춰 **자동차보험료**를 직접적으로 할인해줍니다.</p>
-        </div>
-
-        <div class="input-group">
-            <label for="mileage">5. 연간 주행거리 예상 (마일리지 특약, 최대 40% 할인)</label>
-            <select id="mileage">
-                <option value="over15k">15,000km 초과 (할인 어려움)</option>
-                <option value="10k-15k">10,000km ~ 15,000km</option>
-                <option value="7k-10k">7,000km ~ 10,000km</option>
-                <option value="under7k">7,000km 이하 (최대 할인 구간)</option>
-            </select>
-            <p class="small-text">주행거리가 짧을수록 보험료를 대폭 절감할 수 있는 핵심 특약입니다.</p>
-        </div>
-
-        <div class="input-group">
-            <label for="child">6. 자녀 유무 (자녀 할인 특약, 최대 10% 할인)</label>
-            <select id="child">
-                <option value="no">자녀 없음</option>
-                <option value="child_infant">만 0세 ~ 6세 영유아 있음</option>
-                <option value="child_primary">만 7세 ~ 12세 자녀 있음</option>
-            </select>
-            <p class="small-text">출산 및 육아 가정에 대한 사회적 기여를 인정하여 **자동차보험** 할인 혜택을 제공합니다.</p>
-        </div>
-        
-        <div class="input-group">
-            <label for="driver-exp">7. 운전 경력 인정 (군 운전병/해외 운전 경력 등)</label>
-            <select id="driver-exp">
-                <option value="no">운전 경력 없음</option>
-                <option value="exp_1y">1년 이상 (보험료 할증률 대폭 개선)</option>
-                <option value="exp_3y">3년 이상</option>
-            </select>
-            <p class="small-text">운전 경력은 **20대 자동차보험** 가입 시 매우 중요한 **자동차보험료계산기** 요소입니다.</p>
-        </div>
-
-        <button class="button">최적화된 최종 견적 산출</button>
-
-        <h3>4. 자동차보험 핵심 보장 분석: 책임보험 vs. 종합보험의 차이</h3>
-
-        <p><strong>자동차보험</strong>은 크게 의무 가입인 **책임보험(대인배상 I, 대물배상)**과 선택 가입인 **종합보험**으로 나뉩니다. **자동차보험료계산기**를 이용할 때 가장 먼저 결정해야 할 부분입니다. 책임보험만 가입할 경우 미가입 시 과태료가 부과되며, 사고 발생 시 보상 한도가 매우 낮아 운전자가 경제적 책임을 고스란히 지게 될 위험이 큽니다. 반면, 종합보험은 대인배상 II, 대물배상 확대(2억, 5억, 10억 등), 자기차량손해(자차), 자기신체사고(자손) 또는 자동차상해(자상) 특약, 무보험차 상해 등 운전자의 재산과 안전을 보호하는 다양한 보장을 포함합니다. 2026년 기준, 대부분의 전문가들은 **자동차보험비교견적** 시 **종합보험** 가입을 강력하게 권장하고 있습니다. 특히 대물배상은 최소 2억 원 이상으로 설정하는 것이 고가 수입차와의 사고 발생 시 경제적 위험을 줄일 수 있는 **자동차보험료계산기** 활용의 기본입니다. 예를 들어, **현대 쏘나타**를 운전하는 40대 운전자라도, 고가의 **벤츠 E클래스**나 **테슬라 모델 Y**와 사고가 나면 대물 한도 2천만 원으로는 절대 충분하지 않습니다. 따라서 보험료가 다소 상승하더라도 **대물 5억** 또는 **10억**으로 설정하는 것이 장기적으로 훨씬 이득입니다.</p>
-
-        <h4>4.1. 자차(자기차량손해) 보험료 산정의 특이점: 수리 용이성</h4>
-        <p>자차 보험료는 차량의 가액뿐만 아니라, 사고 발생 시의 수리 용이성과 부품 수급 난이도에 따라 크게 달라집니다. 특히 **테슬라 모델3**나 **기아 EV6**, **현대 아이오닉 5**와 같은 전기차는 배터리팩 교체 비용이 매우 높아 자차 보험료가 일반 내연기관차보다 높게 책정되는 경향이 있습니다. 수입차의 경우 **BMW 5시리즈**나 **아우디 A6** 등은 부품이 해외에서 수급되어야 하므로 국내 생산되는 **기아 K8**이나 **제네시스 G80**에 비해 자차 보험료가 높게 산정됩니다. **자동차보험료계산기** 이용 시, 차량 모델명과 연식을 정확히 입력하는 것이 매우 중요합니다. 2026년에는 차량 모델별 손해율 차등 적용이 더욱 심화되어, 사고가 적은 안전한 차량 모델을 선택하는 것이 보험료 절감의 간접적인 방법이 될 것입니다. 예를 들어, 소형 SUV인 **기아 셀토스**는 **현대 코나** 대비 손해율이 다소 낮게 책정될 수 있어 보험료에 미세한 영향을 줄 수 있습니다.</p>
-
-        <h4>4.2. 자손 vs. 자상 특약: 반드시 '자상'으로 선택해야 하는 이유</h4>
-        <p><strong>자기신체사고(자손)</strong>와 <strong>자동차상해(자상)</strong>는 본인 또는 가족이 사고로 다쳤을 때 보상받는 특약입니다. **자동차보험료계산기**에서 이 두 특약의 차이는 미미할 수 있지만, 실제 보상에서 엄청난 차이를 보입니다. 자손은 보상 한도가 정해져 있고, 보상받기까지의 절차가 까다로운 반면, **자동차상해(자상)**는 정해진 한도 내에서 치료비를 모두 보상하고 휴업손해, 위자료까지 보상해주어 실질적인 혜택이 훨씬 큽니다. 보험료 차이가 크지 않으므로, **자동차보험비교견적** 시 반드시 **자상 특약**으로 선택하는 것이 <strong>자동차보험료</strong>의 가치를 높이는 길입니다. **40대 자동차보험** 가입자라면 특히 가족의 안전을 위해 자상 특약을 필수로 고려해야 합니다.</p>
-
-        <h3>5. 2026년 연령별/경력별 자동차보험료계산기 활용 노하우</h3>
-
-        <p>운전자의 나이와 운전 경력은 **자동차보험료계산기**의 결과에 가장 직접적이고 절대적인 영향을 미칩니다. 특히 **20대 자동차보험** 가입자는 높은 사고율로 인해 매우 높은 보험료를 지불해야 합니다. 하지만 이를 합리적으로 절감할 수 있는 방법들이 있습니다.</p>
-
-        <h4>5.1. 20대 운전자의 보험료 절감 전략 (만 20세~29세)</h4>
-        <p>만 **20세**의 최초 운전자는 가장 비싼 보험료를 경험합니다. 보험사들은 만 24세 이하 운전자를 위험군으로 분류합니다. 이때 **자동차보험료계산기**를 이용할 때 반드시 '만 26세 특약'과 '가족 한정 특약'을 비교해야 합니다. 가족 중 운전 경력이 오래된 부모님을 피보험자로 등록하고, 본인은 운전 가능 범위에 추가하는 것이 하나의 절감 전략이 될 수 있습니다. 또한, 군 운전병 경력이나 해외 체류 시 운전 경력을 **보험개발원**에 등록하여 **운전 경력 인정**을 받는 것은 **20대 자동차보험** 가입자에게 **필수적인 절감 노하우**입니다. 단 1~2년의 경력만 인정받아도 보험료 할인 등급이 대폭 개선되어 **자동차보험료**를 크게 낮출 수 있습니다. 예를 들어, **기아 모닝**을 운전하는 **만 22세** 운전자가 운전 경력 인정을 받으면, 그렇지 않은 경우 대비 수십만 원의 보험료를 절약할 수 있습니다.</p>
-
-        <h4>5.2. 30대~50대 운전자의 안정화 및 추가 할인 전략</h4>
-        <p>**30대 자동차보험** 가입자는 보험료가 안정기에 접어들기 시작하며, 이 시기부터는 **무사고 할인**의 혜택을 극대화해야 합니다. 할인 등급은 매년 무사고 시 상승하며, 이는 장기적으로 가장 큰 보험료 절감 요인으로 작용합니다. **40대 자동차보험** 가입자는 사고 위험도가 가장 낮아 **자동차보험료계산기** 상 최저가에 근접합니다. 이 연령대는 **자녀 할인 특약**, **UBI(운전습관연계) 특약** 등 추가적인 할인 요소를 꼼꼼히 체크하여 최종 **자동차보험료**를 확정해야 합니다. 특히 내비게이션 앱 등을 통해 안전 운전 점수를 획득하면 추가 할인을 받을 수 있는데, 이는 2026년 보험사들이 적극적으로 권장하는 방식입니다.</p>
-
-        <h3>6. 88종 차종별 자동차보험료 분석 (키워드 심화)</h3>
-
-        <p>차종별 **자동차보험료**는 차량의 가격(자차 보험의 기준)뿐만 아니라, 해당 차종의 **손해율**에 따라 결정됩니다. 손해율이란 보험료 수입 대비 보험금 지출의 비율로, 손해율이 높은 차종일수록 보험료가 비싸집니다. **자동차보험료계산기**는 이 손해율 데이터를 기반으로 결과를 산출합니다. 아래는 주요 차종별 보험료 특징입니다.</p>
-        
-        <h4>6.1. 국산 대중차 (쏘나타, K5, 아반떼, 그랜저, 투싼, 싼타페 등)</h4>
-        <p>이 모델들은 부품 수급이 원활하고 정비 인프라가 잘 구축되어 있어 비교적 자차 보험료가 안정적입니다. 특히 **현대 쏘나타**와 **기아 K5**는 국내에서 가장 많이 판매되는 모델인 만큼, 부품 가격 표준화로 인해 합리적인 보험료가 책정됩니다. 그러나 신차인 **현대 그랜저**나 **기아 K8**의 경우, 초기에는 차량 가격이 높아 보험료가 다소 높게 시작될 수 있습니다. **현대 캐스퍼**나 **기아 레이**와 같은 경차는 차량 가격은 낮지만, 사고율이 높아 의외로 자차 보험료가 높게 책정되는 경우가 있습니다. 따라서 경차 운전자도 **자동차보험료계산기**를 통해 견적을 반드시 비교해봐야 합니다.</p>
-
-        <h4>6.2. 고가/수입차 (벤츠 E클래스, BMW 5시리즈, 제네시스 G80, 포르쉐 911 등)</h4>
-        <p>**벤츠 E클래스 보험료**와 **BMW 5시리즈 보험료**는 국산차 대비 압도적으로 높습니다. 이는 수리비가 높고, 부품을 해외에서 조달해야 하는 특성 때문입니다. 특히 **롤스로이스 팬텀**이나 **페라리 488**, **람보르기니 우라칸** 같은 **슈퍼카**는 일반 보험사가 아닌 고가차량 전문 보험에 가입해야 하며, 보험료가 차량 가격의 상당 부분을 차지할 수 있습니다. 국산 프리미엄인 **제네시스 G80**나 **GV80** 역시 일반 국산차 대비 높은 보험료가 책정되므로, **자동차보험료계산기**를 이용해 **자차 자기부담금** 비율을 조정하며 적정 금액을 찾는 것이 중요합니다.</p>
-
-        <h4>6.3. 전기차 (테슬라 모델 3, EV6, 아이오닉 5, 닛산 리프 등)</h4>
-        <p>전기차는 친환경차라는 이점에도 불구하고, 차량 가격이 높고 배터리 관련 사고 시 수리비가 매우 높아 보험사 입장에서 손해율이 높습니다. 특히 **테슬라 모델3 보험료**와 **테슬라 모델 Y 보험료**는 일반 운전자들 사이에서도 화두가 될 만큼 높은 편입니다. 하지만 2026년에는 일부 보험사에서 전기차 전용 특약을 출시하여 충전 중 사고나 배터리 특성 보장 등을 추가하고, 마일리지 특약 등을 통해 **자동차보험료** 부담을 줄여주는 상품들이 확대될 전망입니다. **기아 EV6**나 **현대 아이오닉 5** 운전자들은 이러한 전기차 전용 특약을 필수로 고려해야 합니다.</p>
-
-        <h3>7. 네이버 웹사이트/스니펫 상위 노출을 위한 SEO 최종 점검</h3>
-
-        <p>이 페이지는 '자동차보험료계산기' 키워드로 네이버 웹사이트 영역 및 스니펫 상위 노출을 목표로 설계되었습니다. 긴 호흡의 정보성 텍스트(**10,000자 이상** 충족)와 함께, 다양한 키워드(차종명 88개 이상, 연령대)를 자연스럽게 녹여내어 검색 엔진의 높은 평가를 유도합니다. 특히, **입력란**을 다수 배치하여 사용자가 페이지에 오래 머무르게 하고(체류 시간 증가), 이는 검색 엔진에 긍정적인 신호로 작용합니다. 또한, '2026년 최신' 정보와 **금융감독원** 등의 **공인된 신뢰성 외부 링크** 삽입은 정보의 전문성과 신뢰도를 높여 스니펫 노출에 유리하게 작용합니다.</p>
-
-        <h4>7.1. 핵심 키워드 반복 및 연관성 강조</h4>
-        <p>페이지 전체에 걸쳐 **자동차보험료계산기**, **자동차보험비교견적**, **20대 자동차보험**, **쏘나타 보험료** 등의 핵심 키워드를 반복적으로 사용하여 주제의 명확성을 높였습니다. 예를 들어, **기아 스포티지**를 운전하는 **35세** 직장인이 **자동차보험**에 가입할 때, **다이렉트 자동차보험**을 통한 **자동차보험료계산기** 사용이 얼마나 효율적인지를 구체적으로 설명했습니다. 이처럼 구체적인 사례와 키워드의 조합은 검색 엔진이 페이지를 특정 검색 의도에 최적화된 콘텐츠로 인식하도록 돕습니다.</p>
-
-        <h4>7.2. 2026년도 변화 예측 및 전문성 확보</h4>
-        <p>2026년에는 **자율주행 기술** 탑재 차량에 대한 보험료 할인 특약이 더욱 확대될 전망입니다. 예를 들어, **볼보 XC60**이나 **포드 익스플로러**에 장착된 첨단 ADAS 기능에 대한 할인율이 높아져 **자동차보험료계산기**의 최종 견적에 긍정적인 영향을 미칠 것입니다. 또한, 운전자의 주행 데이터를 분석하는 UBI(Usage-Based Insurance) 시스템의 정교화로 인해 개인별 맞춤 보험료가 더욱 세밀하게 산정될 것입니다. 이러한 전문적인 예측 정보는 사용자에게 실질적인 가치를 제공하며, 페이지의 **정보성**을 높여 상위 노출에 기여합니다.</p>
-
-        <h3>8. 자동차보험료계산기를 통한 현명한 가입 최종 조언</h3>
-
-        <p>결론적으로, **자동차보험료계산기**는 단순히 숫자를 알려주는 도구가 아니라, 당신의 운전 습관, 차량 상태, 그리고 라이프스타일을 종합적으로 반영하여 **자동차보험**에 대한 최적의 답을 제시하는 **전문 컨설턴트**의 역할을 합니다. **만 60세**의 시니어 운전자부터, **만 20세**의 초보 운전자까지, 모든 운전자는 이 도구를 통해 **책임보험**의 의무를 넘어선 **종합보험** 가입의 중요성을 깨달아야 합니다. **쌍용 토레스**, **르노 XM3**, **지프 랭글러**와 같은 다양한 차종 운전자들은 자신의 차량 특성에 맞는 **특약**을 찾아 **자동차보험료**를 절감해야 합니다.</p>
-        
-        <p>가장 현명한 방법은 **최소 5개 이상의 보험사**의 **다이렉트 자동차보험료계산기**를 직접 이용해보는 것입니다. 보험사별로 손해율, 고객 정책, 할인 특약 적용 기준이 모두 다르기 때문에, 비교 없이는 절대 **최저가**를 찾을 수 없습니다. 이 페이지에서 제공된 정보와 입력란을 최대한 활용하여, 2026년에도 안전하고 경제적인 운전 생활을 이어가시기 바랍니다.</p>
-
-        <p class="highlight-box"><strong>최종 행동 촉구:</strong> 지금 바로 상단의 **자동차보험료계산기** 입력란을 채우고, 2026년 당신의 차량(**아반떼**, **스포티지**, **G80** 등)과 연령(**20대**, **40대** 등)에 최적화된 **자동차보험비교견적**을 확인하여 수십만 원의 보험료를 절약하십시오.</p>
-
     </div>
 
+    <!-- JS here -->
+    <!-- (Include the necessary JS scripts here, including jQuery and custom scripts) -->
+    <script type="text/javascript" src="https://nawaracar.com/theme/barit/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://nawaracar.com/theme/barit/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://nawaracar.com/theme/barit/js/custom.js"></script> <!-- Ensure this script handles form submission -->
 
+    <script>
+        // JS Logic (keep existing functionality for forms and data submission, adapted for new content)
 
+        // FAQ Collapse Toggle Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    if (answer.style.display === 'block') {
+                        answer.style.display = 'none';
+                        question.style.backgroundColor = 'var(--primary-color)';
+                        question.style.color = 'white';
+                        question.style.removeProperty('border-bottom');
+                    } else {
+                        answer.style.display = 'block';
+                        question.style.backgroundColor = 'var(--secondary-color)';
+                        question.style.color = 'white';
+                        question.style.borderBottom = '1px solid #e0e0e0';
+                    }
+                });
+            });
+        });
+
+        // Form Submission and Privacy Policy Logic (Keep existing logic from user's original code)
+        $(document).ready(function () {
+            // 팝업 열고닫기 - using jQuery show/hide
+            $(".btnViewPolicy, .showPolicyWin, label[for='agree_chk']").on("click", function (e) {
+                e.preventDefault(); // Prevent default behavior
+                $("#privacyPopup").show();
+            });
+
+            $("#privacyPopup .btnClosePopup, #privacyPopup .btnConfirm").on("click", function () {
+                $("#privacyPopup").hide();
+            });
+
+            // 체크설정
+            $("#privacyPopup .checkAll").on("click", function () {
+                if ($(this).prop("checked") == true) {
+                    $("#privacyPopup .agreeContWrap input[type=checkbox]").prop("checked", true);
+                } else {
+                    $("#privacyPopup .agreeContWrap input[type=checkbox]").prop("checked", false);
+                }
+                setParentAgree();
+            });
+
+            $("#privacyPopup .agreeContWrap input[type=checkbox]").on("click", function () {
+                var allChk = true;
+                $("#privacyPopup .agreeContWrap input[type=checkbox]").each(function () {
+                    if ($(this).prop("checked") == false) {
+                        allChk = false;
+                    }
+                });
+
+                if (allChk == false) {
+                    $("#privacyPopup .checkAll").prop("checked", false);
+                } else {
+                    $("#privacyPopup .checkAll").prop("checked", true);
+                }
+                setParentAgree();
+            });
+
+            // Allow checkbox to be checked
+            $(".checkMain").on("click", function (e) {
+                e.stopPropagation(); // Prevent event from bubbling up
+            });
+        });
+
+        function setParentAgree() {
+            if ($(".agreeChk1").prop("checked") == true && $(".agreeChk2").prop("checked") == true) {
+                $(".checkMain").prop("checked", true);
+            } else {
+                $(".checkMain").prop("checked", false);
+            }
+        }
+
+        document.addEventListener('scroll', function () {
+            const scrollPosition = window.scrollY || window.pageYOffset;
+            const sideForms = document.querySelectorAll('.sideForm');
+
+            // Adjust scroll threshold for sideForm visibility based on new content length
+            const scrollThreshold = 100; // Keep side form visible near top
+
+            if (scrollPosition > scrollThreshold) {
+                sideForms.forEach(function (sideForm) {
+                    sideForm.classList.remove('on');
+                });
+            } else {
+                sideForms.forEach(function (sideForm) {
+                    sideForm.classList.add('on');
+                });
+            }
+        });
+
+        //submit logic from original code (adapted for new form structure)
+        $(document).ready(function () {
+            $("input[name=mphone]").keyup(function (event) {
+                var inputVal = $(this).val();
+                $(this).val(inputVal.replace(/[^0-9]/gi, ''));
+            });
+
+            $("#btnSubmitS01")
+                .off("click.S01")
+                .on("click.S01", function () {
+                    const frmS01Name = $("#frmS01Name").val();
+                    const phoneMHead = $(".phoneHeadSelector_m").val(); // 앞자리 선택값(010, 011 등)
+                    const phoneMNumber = $("#frmS01Mphone").val(); // 나머지 번호
+                    const frmS01Mphone = phoneMHead + phoneMNumber; // 전체 전화번호 조합
+                    const hasChecked = $("#privacyAgree3").prop("checked");
+                    submitForm(1, frmS01Name, frmS01Mphone, hasChecked);
+                });
+
+            $("#btnSubmitS02")
+                .off("click.S02")
+                .on("click.S02", function () {
+                    const frmS02Name = $("#frmS02Name").val();
+                    const phoneHead = $(".phoneHeadSelector").val(); // 앞자리 선택값(010, 011 등)
+                    const phoneNumber = $("#frmS02Mphone").val(); // 나머지 번호
+                    const frmS02Mphone = phoneHead + phoneNumber; // 전체 전화번호 조합
+                    const hasChecked = $("#privacyAgree2").prop("checked");
+                    submitForm(2, frmS02Name, frmS02Mphone, hasChecked);
+                });
+
+            $("#btnSubmitS03")
+                .off("click.S03")
+                .on("click.S03", function () {
+                    const frmS03Name = $("#frmS03Name").val();
+                    const frmS03Mphone = $("#frmS03Mphone").val();
+                    const hasChecked = $("#agree_chk").prop("checked");
+                    submitForm(3, frmS03Name, frmS03Mphone, hasChecked);
+                });
+
+            //팝업 열고닫기
+            $(".btnViewPolicy, .showPolicyWin").on("click", function () {
+                $("#privacyPopup").show();
+            });
+            $("#privacyPopup .btnClosePopup, #privacyPopup .btnConfirm").on("click", function () {
+                $("#privacyPopup").hide();
+            });
+        });
+
+        const paramReferer = '';
+        const paramCampUid = '';
+        const paramUtmMedium = '';
+
+        //기본 데이터 로드
+        function loadData() {
+            const async = $.Deferred();
+            $.ajax({
+                url: 'https://db.siwoomarketing.com/api/index.php?ctrl=landing.info',
+                type: 'post',
+                dataType: 'json',
+                data: {land_uid: "9"}, // Placeholder land_uid
+                success: function (data) {
+                    async.resolve(data);
+                },
+                error: function (err) {
+                    async.reject(err);
+                },
+            });
+
+            return async.promise();
+        }
+
+        async function submitForm(formType = 1, userName, userPhone, isChecked = false) {
+            let loadInitData;
+            let param = {};
+
+            let sms_title;
+            let sms_msg;
+            let sms_broadcast;
+            let sms_use_customer;
+            let sms_use_broadcast;
+            let user_id;
+            let land_uid;
+            try {
+                loadInitData = await loadData();
+                sms_title = loadInitData["extra"]["config"]["sms_title"];
+                sms_msg = loadInitData["extra"]["config"]["sms_msg"];
+                sms_broadcast = loadInitData["extra"]["config"]["sms_broadcast"];
+                sms_use_customer = loadInitData["extra"]["config"]["sms_use_customer"];
+                sms_use_broadcast = loadInitData["extra"]["config"]["sms_use_broadcast"];
+                user_id = loadInitData["extra"]["config"]["user_id"];
+                land_uid = loadInitData["extra"]["config"]["land_uid"];
+            } catch (e) {
+                console.log(e);
+                alert("폼 제출에 실패했습니다. 잠시 후 다시 시도해주세요.");
+                return;
+            }
+
+            if (!isChecked) {
+                alert("약관 동의 후 가능합니다.");
+                const myModal = new bootstrap.Modal(document.getElementById('privacyPopup'));
+                myModal.show();
+                return;
+            }
+
+            // 이벤트 SMS 수신 동의 처리
+            let eventSmsFlag = $("#privacyPopup .agreeChk3").prop("checked") ? "Y" : "N";
+            $("input[name=rcv_event_sms]").val(eventSmsFlag);
+
+            // 폼 데이터 직렬
+            let resultData;
+
+            // 성공 처리 방식 설정
+            let successAction = {
+                url: "/success/complete.php",
+                showAlert: formType > 0, // 폼2,3만 알림 표시
+                reload: formType > 0     // 폼2,3만 새로고침
+            };
+
+            param["inqType"] = 2;
+            param["smsTitle"] = sms_title;
+            param["smsMsg"] = sms_msg;
+            param["msgType"] = "mms";
+            param["smsBroadcastNumber"] = sms_broadcast;
+            param["smsSendYN"] = sms_use_customer;
+            param["smsSendBroadcastYN"] = sms_use_broadcast;
+            param["user_id"] = user_id;
+            param["land_uid"] = land_uid;
+
+            //TODO 이벤트 태그
+            param["rcv_event_sms"] = eventSmsFlag; // Use actual value
+            param["content"] = "";
+            param["returnUrl"] = "";
+            param["refererUrl"] = paramReferer;
+            param["campUid"] = paramCampUid;
+            param["utmMedium"] = paramUtmMedium;
+            param["showCompleteAlertMsg"] = "Y";
+            param["name"] = userName;
+            param["mphone"] = userPhone;
+
+            try {
+                resultData = await submitFormProc(param);
+                if (resultData["returnCode"]) {
+                    if (successAction.showAlert) {
+                        alert("신청이 완료되었습니다.");
+                    }
+                    if (successAction.reload) {
+                        document.location.reload();
+                    } else {
+                        document.location.href = successAction.url;
+                    }
+                } else {
+                    alert(resultData["returnMsg"]);
+                }
+            } catch (e) {
+                alert("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+                return;
+            }
+
+            return false;
+        }
+
+        function submitFormProc(param) {
+            const async = $.Deferred();
+            // AJAX 요청
+            $.ajax({
+                url: "https://db.siwoomarketing.com/api/index.php?ctrl=inq.regist",
+                type: "post",
+                dataType: "json",
+                data: param
+                , success: function (data) {
+                    async.resolve(data);
+                },
+                error: function (err) {
+                    async.reject(err);
+                }
+            });
+            return async.promise();
+        }
+    </script>
+	
 
 
 	
